@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^29.1.5"
+  },
+  "dependencies": {
+    "openssl": "^2.0.0"
   }
 }

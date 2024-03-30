@@ -9,7 +9,16 @@
   <h1>Conversor PFX para CRT + KEY</h1>
   <p>Selecione o arquivo PFX:</p>
   <input type="file" id="fileInput" accept=".pfx"><br><br>
-  <p>Digite a senha do PFX:</p>
+  <p>Selecione o arquivo de senha do PFX:</p>
+  <input type="file" id="fileInput" accept=".key"><br><br>
+  <br><br>
+  <button onclick="convert()">Converter</button>
+  <p id="result"></p>
+
+  <h1>Conversor CRT + KEY para PFX</h1>
+  <p>Selecione o arquivo CRT:</p>
+  <input type="file" id="fileInput" accept=".crt"><br><br>
+  <p>Selecione o arquivo KEY:</p>
   <input type="file" id="fileInput" accept=".key"><br><br>
   <br><br>
   <button onclick="convert()">Converter</button>

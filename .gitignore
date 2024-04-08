@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignorar o arquivo launch.json do Visual Studio Code
+.vscode/launch.json

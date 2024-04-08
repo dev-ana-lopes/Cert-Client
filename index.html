@@ -1,52 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conversor PFX para CRT + KEY</title>
-</head>
-<body>
-  <h1>Conversor PFX para CRT + KEY</h1>
-  <p>Selecione o arquivo PFX:</p>
-  <input type="file" id="fileInput" accept=".pfx"><br><br>
-  <p>Selecione o arquivo de senha do PFX:</p>
-  <input type="file" id="fileInput" accept=".key"><br><br>
-  <br><br>
-  <button onclick="convert()">Converter</button>
-  <p id="result"></p>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Electron Test</title>
+    </head>
 
-  <h1>Conversor CRT + KEY para PFX</h1>
-  <p>Selecione o arquivo CRT:</p>
-  <input type="file" id="fileInput" accept=".crt"><br><br>
-  <p>Selecione o arquivo KEY:</p>
-  <input type="file" id="fileInput" accept=".key"><br><br>
-  <br><br>
-  <button onclick="convert()">Converter</button>
-  <p id="result"></p>
+    <body>
+        <input type="button" id="button" value="Run Script">
+    </body>
 
-  <script>
-    const ipcRenderer = require('electron').ipcRenderer;
-
-    function convert() {
-      const pfxFile = document.getElementById('pfx-file').files[0];
-      const pfxPassword = document.getElementById('pfx-password').value;
-
-      ipcRenderer.send('convert-pfx', pfxFile.path, pfxPassword);
-
-      ipcRenderer.on('pfx-converted', (event, data) => {
-        if (data.error) {
-          document.getElementById('result').innerHTML = `Erro: ${data.error}`;
-        } else {
-          document.getElementById('result').innerHTML = `
-            Certificado (CRT): ${data.cert}<br />
-            Chave privada (KEY): ${data.key}
-          `;
-        }
-      });
-    }
-    
-
-
-  </script>
-</body>
+    <script>
+        document.getElementById('button').addEventListener('click', () => {
+            window.ipcRender.send('runScript');
+        })
+    </script>
 </html>

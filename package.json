@@ -4,13 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^29.1.6"
+    "electron": "^29.2.0"
   },
   "dependencies": {
     "openssl": "^2.0.0"

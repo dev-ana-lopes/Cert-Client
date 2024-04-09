@@ -79,3 +79,12 @@ function convertPfxToCrt() {
       console.log(`Saída do terminal: ${stdout}`);
     });
   }
+
+  module.exports = {
+    convertPfxToCrt,
+    convertCrtAndKeyToPfx,
+    isPfx,
+    isKey,
+    isCrt,
+    corvertPfx
+};

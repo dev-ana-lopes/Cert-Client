@@ -1,17 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
     <head>
         <meta charset="UTF-8">
-        <title>Electron Test</title>
+        <title>Conversor PFX para CRT + KEY</title>
     </head>
 
     <body>
+        <h1>Conversor PFX para CRT + KEY</h1>
+        <p>Selecione o arquivo PFX:</p>
+        <input type="file" id="pfxInput" accept=".pfx"><br><br>
+        <p>Selecione o arquivo de senha do PFX:</p>
+        <input type="file" id="pfxKeyInput" accept=".key"><br><br>
+        <br><br>
+        <button onclick="convertPfxToCrt()">Converter</button>
+        <p id="result"></p>
+      
+        <h1>Conversor CRT + KEY para PFX</h1>
+        <p>Selecione o arquivo CRT:</p>
+        <input type="file" id="crtInput" accept=".crt"><br><br>
+        <p>Selecione o arquivo KEY:</p>
+        <input type="file" id="crtKeyInput" accept=".key"><br><br>
+        <br><br>
+        <button onclick="convertCrtAndKeyToPfx()">Converter</button>
+        <p id="result"></p>
+
         <input type="button" id="button" value="Run Script">
     </body>
 
     <script>
-        document.getElementById('button').addEventListener('click', () => {
-            window.ipcRender.send('runScript');
-        })
+         function convertPfxToCrt() {
+            const pfxFile = document.getElementById('pfxInput').files[0];
+            const pfxKeyFile = document.getElementById('pfxKeyInput').files[0];
+
+            console.log(pfxFile,pfxKeyFile);
+       
+            const pfxFilePath = pfxFile ? pfxFile.path : null;
+            const pfxFileName = pfxFile ? pfxFile.name : null;
+            const pfxKeyFilePath = pfxKeyFile ? pfxKeyFile.path : null;
+            const pfxKeyFileName = pfxKeyFile ? pfxKeyFile.name : null;
+            
+            window.ipcRender.send('convertPfxToCrt', { 
+                pfxFilePath,
+                pfxFileName,
+                pfxKeyFilePath,
+                pfxKeyFileName
+            });
+        }
+
+        function convertCrtAndKeyToPfx() {
+           
+            const crtFile = document.getElementById('crtInput').files[0];
+            const crtKeyFile = document.getElementById('crtKeyInput').files[0];
+
+            window.ipcRender.send('convertCrtAndKeyToPfx', { crtFile, crtKeyFile });
+        }
     </script>
 </html>

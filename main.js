@@ -7,6 +7,8 @@ const electronIpcMain = require('electron').ipcMain;
 const nodePath = require("path");
 const nodeChildProcess = require('child_process');
 
+const{isPfx,isKey,isCrt,corvertPfx} = require('./service');
+
 let window;
 
 function createWindow() {
@@ -46,7 +48,20 @@ electronApp.on('activate', () => {
 });
 
 
-// ---
+electronIpcMain.on('convertPfxToCrt', (event, files) => {
+    const { pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName } = files;
+    console.log('Caminho do arquivo PFX:', pfxFilePath);
+    console.log('Nome do arquivo PFX:', pfxFileName);
+    console.log('Caminho do arquivo de senha do PFX:', pfxKeyFilePath);
+    console.log('Nome do arquivo de senha do PFX:', pfxKeyFileName);
+
+   console.log(isPfx(pfxFileName));
+})
+
+electronIpcMain.on('convertCrtAndKeyToPfx', () => {
+    console.log("soco");
+})
+
 
 electronIpcMain.on('runScript', () => {
     // Windows
@@ -54,7 +69,6 @@ electronIpcMain.on('runScript', () => {
 
     // MacOS & Linux
     // let script = nodeChildProcess.spawn('bash', ['test.sh', 'arg1', 'arg2']);
-    print();
 
     console.log('PID: ' + script.pid);
 
@@ -70,7 +84,3 @@ electronIpcMain.on('runScript', () => {
         console.log('Exit Code: ' + code);
     });
 })
-
-function print(){
-    console.log("A");
-}

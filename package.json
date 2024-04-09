@@ -13,6 +13,7 @@
     "electron": "^29.1.5"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "openssl": "^2.0.0"
   }
 }

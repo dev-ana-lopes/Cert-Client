@@ -1,20 +1,16 @@
 'use strict';
-
 const electronApp = require('electron').app;
 const electronBrowserWindow = require('electron').BrowserWindow;
 const electronIpcMain = require('electron').ipcMain;
 
 const nodePath = require("path");
 const nodeChildProcess = require('child_process');
-
-const{isPfx,isKey,isCrt,corvertPfx} = require('./service');
+const services = require('./services');
 
 let window;
 
 function createWindow() {
     const window = new electronBrowserWindow({
-        x: 0,
-        y: 0,
         width: 800,
         height: 600,
         show: false,
@@ -47,28 +43,26 @@ electronApp.on('activate', () => {
     }
 });
 
-
 electronIpcMain.on('convertPfxToCrt', (event, files) => {
     const { pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName } = files;
-    console.log('Caminho do arquivo PFX:', pfxFilePath);
-    console.log('Nome do arquivo PFX:', pfxFileName);
-    console.log('Caminho do arquivo de senha do PFX:', pfxKeyFilePath);
-    console.log('Nome do arquivo de senha do PFX:', pfxKeyFileName);
+   
+    console.log('LOG:', pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName);
 
-   console.log(isPfx(pfxFileName));
+    services.convertPfxToCrt(pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName);
+    
+    
 })
 
 electronIpcMain.on('convertCrtAndKeyToPfx', () => {
     console.log("soco");
 })
 
+services.eventEmitter.on('invalidFile', (data) => {
+    console.log('Arquivo invlido:', data.pfxFileName, data.pfxKeyFileName);
+});
 
 electronIpcMain.on('runScript', () => {
-    // Windows
     let script = nodeChildProcess.spawn('cmd.exe', ['/c', 'test.bat', 'arg1', 'arg2']);
-
-    // MacOS & Linux
-    // let script = nodeChildProcess.spawn('bash', ['test.sh', 'arg1', 'arg2']);
 
     console.log('PID: ' + script.pid);
 

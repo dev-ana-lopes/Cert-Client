@@ -2,9 +2,7 @@
 const electronApp = require('electron').app;
 const electronBrowserWindow = require('electron').BrowserWindow;
 const electronIpcMain = require('electron').ipcMain;
-
 const nodePath = require("path");
-const nodeChildProcess = require('child_process');
 const services = require('./services');
 
 let window;
@@ -43,38 +41,22 @@ electronApp.on('activate', () => {
     }
 });
 
-electronIpcMain.on('convertPfxToCrt', (event, files) => {
-    const { pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName } = files;
+electronIpcMain.on('verifyPfxToCrt', (event, files) => {
+    const { pfxFilePath, pfxFileName, pfxPassword } = files;
    
-    console.log('LOG:', pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName);
+    console.log('\nLOG:', pfxFilePath, pfxFileName, pfxPassword);
 
-    services.convertPfxToCrt(pfxFilePath, pfxFileName, pfxKeyFilePath, pfxKeyFileName);
-    
-    
+    services.convertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword);
 })
 
-electronIpcMain.on('convertCrtAndKeyToPfx', () => {
-    console.log("soco");
+electronIpcMain.on('verifyCrtToPfx', (event, files) => {
+    const { crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword } = files;
+    
+    console.log('\nLOG:', crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword);
+
+    services.convertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword);
 })
 
 services.eventEmitter.on('invalidFile', (data) => {
-    console.log('Arquivo invlido:', data.pfxFileName, data.pfxKeyFileName);
+    console.log('\nArquivo invlido:', data.pfxFileName);
 });
-
-electronIpcMain.on('runScript', () => {
-    let script = nodeChildProcess.spawn('cmd.exe', ['/c', 'test.bat', 'arg1', 'arg2']);
-
-    console.log('PID: ' + script.pid);
-
-    script.stdout.on('data', (data) => {
-        console.log('stdout: ' + data);
-    });
-
-    script.stderr.on('data', (err) => {
-        console.log('stderr: ' + err);
-    });
-
-    script.on('exit', (code) => {
-        console.log('Exit Code: ' + code);
-    });
-})

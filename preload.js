@@ -7,8 +7,8 @@ const ipc = {
     'render': {
         // From render to main.
         'send': [
-            'convertPfxToCrt', // Novo canal para a conversão de PFX para CRT + KEY
-            'convertCrtAndKeyToPfx'// Channel name
+            'verifyPfxToCrt', // Novo canal para a conversão de PFX para CRT + KEY
+            'verifyCrtToPfx'// Channel name
         ],
         // From main to render.
         'receive': [],

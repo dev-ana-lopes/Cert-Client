@@ -28,59 +28,55 @@
     </body>
 
     <script>
-    function startConvertPfxToCrt() {
-        const pfxFile = document.getElementById('pfxInput').files[0];
-        const pfxPassword = document.getElementById('pfxPassword').value;
+        function startConvertPfxToCrt() {
+            const pfxFile = document.getElementById('pfxInput').files[0];
+            const pfxPassword = document.getElementById('pfxPassword').value;
 
-        console.log(pfxFile,pfxPassword);
+            const pfxFilePath = pfxFile ? pfxFile.path : null;
+            const pfxFileName = pfxFile ? pfxFile.name : null;
 
-        const pfxFilePath = pfxFile ? pfxFile.path : null;
-        const pfxFileName = pfxFile ? pfxFile.name : null;
+            if (pfxFile) {
+                window.ipcRender.send('verifyPfxToCrt', { 
+                    pfxFilePath,
+                    pfxFileName,
+                    pfxPassword
+                });
 
-        if (pfxFile && pfxPassword) {
-            window.ipcRender.send('verifyPfxToCrt', { 
-                pfxFilePath,
-                pfxFileName,
-                pfxPassword
-            });
-
-            document.getElementById('pfxInput').value = '';
-            document.getElementById('pfxPassword').value = '';
-        } else {
-            console.log("verifique os arquivos do innput");
+                document.getElementById('pfxInput').value = '';
+                document.getElementById('pfxPassword').value = '';
+            } else {
+                console.log("verifique os arquivos do innput");
+            }
         }
-    }
 
-    function startConvertCrtAndKeyToPfx() {
-    
-        const crtFile = document.getElementById('crtInput').files[0];
-        const crtKeyFile = document.getElementById('crtKeyInput').files[0];
-        const crtPassword = document.getElementById('crtPassword').value;
+        function startConvertCrtAndKeyToPfx() {
+        
+            const crtFile = document.getElementById('crtInput').files[0];
+            const crtKeyFile = document.getElementById('crtKeyInput').files[0];
+            const crtPassword = document.getElementById('crtPassword').value;
 
-        console.log(crtFile,crtKeyFile,crtPassword);
+            const crtFilePath = crtFile.path;
+            const crtFileName = crtFile.name;
+            const crtKeyFilePath = crtKeyFile.path;
+            const crtKeyFileName = crtKeyFile.name;
+        
+            if (crtFile && crtKeyFile) {
+                window.ipcRender.send('verifyCrtToPfx', {
+                    crtFilePath,
+                    crtFileName,
+                    crtKeyFilePath,
+                    crtKeyFileName,
+                    crtPassword
+                });
 
-        const crtFilePath = crtFile ? crtFile.path : null;
-        const crtFileName = crtFile ? crtFile.name : null;
-        const crtKeyFilePath = crtKeyFile ? crtKeyFile.path : null;
-        const crtKeyFileName = crtKeyFile ? crtKeyFile.name : null;
-     
-        if (crtFile && crtKeyFile && crtPassword) {
-            window.ipcRender.send('verifyCrtToPfx', {
-                crtFilePath,
-                crtFileName,
-                crtKeyFilePath,
-                crtKeyFileName,
-                crtPassword
-            });
-
-            document.getElementById('crtInput').value = '';
-            document.getElementById('crtKeyInput').value = '';
-            document.getElementById('crtPassword').value = '';
-        } else {
-            console.log("verifique os arquivos do innput");
+                document.getElementById('crtInput').value = '';
+                document.getElementById('crtKeyInput').value = '';
+                document.getElementById('crtPassword').value = '';
+            } else {
+                console.log("verifique os arquivos do innput");
+            }
+        
         }
-    
-    }
 
     </script>
 </html>

@@ -1,4 +1,4 @@
-![Cert-Client Logo](https://cdn.discordapp.com/attachments/1105276174814421122/1228784924501217371/Captura_de_tela_2024-04-13_160643-transformed-removebg-preview.png?ex=662d4e23&is=661ad923&hm=b25f6ff2ae15e70e12b70c2fdc3b011b2763681ce61f4230a529b1c2cbed73c3&)
+![Cert-Client Logo](https://cdn.discordapp.com/attachments/1105276174814421122/1228785695632527470/Captura_de_tela_2024-04-13_161439-transformed-removebg-preview.png?ex=662d4edb&is=661ad9db&hm=0b3ccfd66c8e03a1e4ac37261347386bf38a095230aabd099039db4dbb1684f3&)
 
 [![CircleCI Build Status](https://circleci.com/gh/electron/electron/tree/main.svg?style=shield)](https://circleci.com/gh/electron/electron/tree/main)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/4lggi9dpjc1qob7k/branch/main?svg=true)](https://ci.appveyor.com/project/electron-bot/electron-ljo26/branch/main)

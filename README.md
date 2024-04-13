@@ -20,55 +20,41 @@ This project adheres to the Contributor Covenant
 By participating, you are expected to uphold this code. Please report unacceptable
 behavior to [coc@electronjs.org](mailto:coc@electronjs.org).
 
-## Installation
+## Instalação
 
-To install prebuilt Electron binaries, use [`npm`](https://docs.npmjs.com/).
-The preferred method is to install Electron as a development dependency in your
-app:
+Para instalar os recursos nescessarios para usar nosso aplicativo voce precisa baixar esses recursos em sua maquina: 
 
+* A porra do nome do arquivo 
 ```sh
-npm install electron --save-dev
+Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
+```
+* AI copia e colar se precisar de mais de 1 e edita 
+```sh
+Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
+```
+* ai faz uma aba pros comando linux tambem 
+```sh
+Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
 ```
 
-For more installation options and troubleshooting tips, see
-[installation](docs/tutorial/installation.md). For info on how to manage Electron versions in your apps, see
-[Electron versioning](docs/tutorial/electron-versioning.md).
 
-## Platform support
+## Suporte para plataformas
 
 Each Electron release provides binaries for macOS, Windows, and Linux.
 
-* macOS (Catalina and up): Electron provides 64-bit Intel and ARM binaries for macOS. Apple Silicon support was added in Electron 11.
-* Windows (Windows 10 and up): Electron provides `ia32` (`x86`), `x64` (`amd64`), and `arm64` binaries for Windows. Windows on ARM support was added in Electron 5.0.8. Support for Windows 7, 8 and 8.1 was [removed in Electron 23, in line with Chromium's Windows deprecation policy](https://www.electronjs.org/blog/windows-7-to-8-1-deprecation-notice).
+* Aqui vai dizer em que plataformas roda a porra do projeto provavelmente em tudo mais tem que testar fds
+*ai bota um topico pra cada 1 tipo de plataforma igual ai em baixo
 * Linux: The prebuilt binaries of Electron are built on Ubuntu 20.04. They have also been verified to work on:
   * Ubuntu 18.04 and newer
   * Fedora 32 and newer
   * Debian 10 and newer
 
-## Quick start & Electron Fiddle
 
-Use [`Electron Fiddle`](https://github.com/electron/fiddle)
-to build, run, and package small Electron experiments, to see code examples for all of Electron's APIs, and
-to try out different versions of Electron. It's designed to make the start of your journey with
-Electron easier.
+## Documentação
 
-Alternatively, clone and run the
-[electron/electron-quick-start](https://github.com/electron/electron-quick-start)
-repository to see a minimal Electron app in action:
+* [electronjs.org/docs](https://electronjs.org/docs) - Documento de requisitos
+* [electron/fiddle](https://github.com/electron/fiddle) - se quiser outro copia e cola o codigo ai 
 
-```sh
-git clone https://github.com/electron/electron-quick-start
-cd electron-quick-start
-npm install
-npm start
-```
-
-## Resources for learning Electron
-
-* [electronjs.org/docs](https://electronjs.org/docs) - All of Electron's documentation
-* [electron/fiddle](https://github.com/electron/fiddle) - A tool to build, run, and package small Electron experiments
-* [electron/electron-quick-start](https://github.com/electron/electron-quick-start) - A very basic starter Electron app
-* [electronjs.org/community#boilerplates](https://electronjs.org/community#boilerplates) - Sample starter apps created by the community
 
 ## Programmatic usage
 

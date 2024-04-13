@@ -1,4 +1,4 @@
-[![Electron Logo](https://electronjs.org/images/electron-logo.svg)](https://electronjs.org)
+[![Cert-Client Logo]([https://electronjs.org/images/electron-logo.svg)](https://electronjs.org](https://cdn.discordapp.com/attachments/1105276174814421122/1228782011376734238/Captura_de_tela_2024-04-13_155806-transformed-removebg-preview.png?ex=662d4b6d&is=661ad66d&hm=7ef613f278f446437376b0e2320da614109024cd961df66b71bd2293be9bb541&))
 
 [![CircleCI Build Status](https://circleci.com/gh/electron/electron/tree/main.svg?style=shield)](https://circleci.com/gh/electron/electron/tree/main)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/4lggi9dpjc1qob7k/branch/main?svg=true)](https://ci.appveyor.com/project/electron-bot/electron-ljo26/branch/main)
@@ -20,9 +20,9 @@ This project adheres to the Contributor Covenant
 By participating, you are expected to uphold this code. Please report unacceptable
 behavior to [coc@electronjs.org](mailto:coc@electronjs.org).
 
-## Instalação
+## Instalação/Pacotes nescessarios
 
-Para instalar os recursos nescessarios para usar nosso aplicativo voce precisa baixar esses recursos em sua maquina: 
+Para instalar os recursos nescessarios para usar nosso aplicativo voce precisa baixar esses recursos em sua maquina : 
 
 * A porra do nome do arquivo 
 ```sh
@@ -40,7 +40,7 @@ Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
 
 ## Suporte para plataformas
 
-Each Electron release provides binaries for macOS, Windows, and Linux.
+Essas são as plataformas/sistemas operacionais que nosso aplicativo funciona sem problemas.
 
 * Aqui vai dizer em que plataformas roda a porra do projeto provavelmente em tudo mais tem que testar fds
 *ai bota um topico pra cada 1 tipo de plataforma igual ai em baixo

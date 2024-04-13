@@ -4,9 +4,7 @@
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/4lggi9dpjc1qob7k/branch/main?svg=true)](https://ci.appveyor.com/project/electron-bot/electron-ljo26/branch/main)
 [![Electron Discord Invite](https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white)](https://discord.gg/electronjs)
 
-:memo: Available Translations: 🇨🇳 🇧🇷 🇪🇸 🇯🇵 🇷🇺 🇫🇷 🇺🇸 🇩🇪.
-View these docs in other languages on our [Crowdin](https://crowdin.com/project/electron) project.
-
+:memo: Aqui nessa area fala sobre a porra do projeto enrola ai pra dar as linha e bota uns link pra tecnospeed ai fds tmj
 The Electron framework lets you write cross-platform desktop applications
 using JavaScript, HTML and CSS. It is based on [Node.js](https://nodejs.org/) and
 [Chromium](https://www.chromium.org) and is used by the [Visual Studio
@@ -55,47 +53,17 @@ Essas são as plataformas/sistemas operacionais que nosso aplicativo funciona se
 * [electronjs.org/docs](https://electronjs.org/docs) - Documento de requisitos
 * [electron/fiddle](https://github.com/electron/fiddle) - se quiser outro copia e cola o codigo ai 
 
+## Quem fez
 
-## Programmatic usage
-
-Most people use Electron from the command line, but if you require `electron` inside
-your **Node app** (not your Electron app) it will return the file path to the
-binary. Use this to spawn Electron from Node scripts:
-
-```javascript
-const electron = require('electron')
-const proc = require('node:child_process')
-
-// will print something similar to /Users/maf/.../Electron
-console.log(electron)
-
-// spawn Electron
-const child = proc.spawn(electron)
-```
-
-### Mirrors
-
-* [China](https://npmmirror.com/mirrors/electron/)
-
-See the [Advanced Installation Instructions](https://www.electronjs.org/docs/latest/tutorial/installation#mirror) to learn how to use a custom mirror.
-
-## Documentation translations
-
-We crowdsource translations for our documentation via [Crowdin](https://crowdin.com/project/electron).
-We currently accept translations for Chinese (Simplified), French, German, Japanese, Portuguese,
-Russian, and Spanish.
-
-## Contributing
-
-If you are interested in reporting/fixing issues and contributing directly to the code base, please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on what we're looking for and how to get started.
-
-## Community
-
-Info on reporting bugs, getting help, finding third-party tools and sample apps,
-and more can be found on the [Community page](https://www.electronjs.org/community).
+* Quer saber quem fez essa projeto existir?
+  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
+  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
+  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
+  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai
+  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai
 
 ## License
 
 [MIT](https://github.com/electron/electron/blob/main/LICENSE)
 
-When using Electron logos, make sure to follow [OpenJS Foundation Trademark Policy](https://trademark-policy.openjsf.org/).
+Ai tu bota o link da licensa mit ai tmj

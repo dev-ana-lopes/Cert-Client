@@ -6,7 +6,7 @@ const forge = require('node-forge');
 
 function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword) {
   if (isPfx(pfxFileName)) {
-    covertPfx(pfxFilePath, pfxFileName, pfxPassword);
+    convertPfx(pfxFilePath, pfxFileName, pfxPassword);
   } else {
     eventEmitter.emit('invalidFile', { pfxFileName });
   }
@@ -14,7 +14,7 @@ function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword) {
 
 function checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
   if (isCrt(crtFileName) && isKey(crtKeyFileName)) {
-    covertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword);
+    convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtPassword);
   } else {
     eventEmitter.emit('invalidFile', { crtFileName, crtKeyFileName });
   }
@@ -32,56 +32,14 @@ function isCrt(crtInput) {
   return crtInput.endsWith(".crt");
 }
 
-// function covertPfx(pfxFilePath, pfxFileName, pfxPassword) {
-//   const folderPath = createFolder();
-
-//   const pfxData = fs.readFileSync(pfxFilePath);
-
-//   const pfxAsn1 = forge.asn1.fromDer(pfxData.toString('binary'));
-//   let pfx;
-
-//   try {
-//     pfx = forge.pkcs12.pkcs12FromAsn1(pfxAsn1, pfxPassword);
-//   } catch(ex) {
-//     if (ex.message.includes('PKCS#12 MAC could not be verified')) {
-//       eventEmitter.emit('invalidPassword', {pfxPassword});
-//       return;
-//     } 
-//   }
-
-//   const privateKeyBag = pfx.getBags({ bagType: forge.pki.oids.pkcs8ShroudedKeyBag })[forge.pki.oids.pkcs8ShroudedKeyBag][0];
-//   const certificateBag = pfx.getBags({ bagType: forge.pki.oids.certBag })[forge.pki.oids.certBag][0];
-
-//   if (!privateKeyBag || !certificateBag) {
-//     throw new Error('Chave privada ou certificado não encontrados no arquivo PFX');
-//   }
-
-//   const privateKey = privateKeyBag.key;
-//   const certificate = certificateBag.cert;
-
-//   const chavePrivadaPem = forge.pki.privateKeyToPem(privateKey);
-//   const certificadoPem = forge.pki.certificateToPem(certificate);
-  
-//   const certificadoFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.crt`);
-//   const chavePrivadaFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.key`);
-
-//   // const timestamp = new Date().getTime(); 
-//   // const uniqueFileNamePrefix = `${pfxFileName.replace(/\.pfx$/, '')}_${timestamp}`;
-//   // const certificadoFilePath = path.join(folderPath, `${uniqueFileNamePrefix}.crt`);
-//   // const chavePrivadaFilePath = path.join(folderPath, `${uniqueFileNamePrefix}.key`);
-
-//   fs.writeFileSync(certificadoFilePath, certificadoPem);
-//   fs.writeFileSync(chavePrivadaFilePath, chavePrivadaPem);
-
-//   console.log('\nCertificado salvo em:', certificadoFilePath);
-//   console.log('\nChave privada salva em:', chavePrivadaFilePath);
-// }
-
-function readPfxFile(pfxFilePath) {
-  return fs.readFileSync(pfxFilePath);
+// --------------------------------------------------------------------------- 
+// adicionar o await na validação senha. <3
+function readFile(filePath) {
+  return fs.readFileSync(filePath);
 }
 
 function parsePfxData(pfxData, pfxPassword) {
+  console.log('\nConvertendo certificado para formato compreensível...');
   const pfxAsn1 = forge.asn1.fromDer(pfxData.toString('binary'));
   try {
     return forge.pkcs12.pkcs12FromAsn1(pfxAsn1, pfxPassword);
@@ -93,6 +51,7 @@ function parsePfxData(pfxData, pfxPassword) {
 }
 
 function extractPrivateKeyAndCertificate(pfx) {
+  console.log('\nCriando arquivo CRT e KEY...');
   const privateKeyBag = pfx.getBags({ bagType: forge.pki.oids.pkcs8ShroudedKeyBag })[forge.pki.oids.pkcs8ShroudedKeyBag][0];
   const certificateBag = pfx.getBags({ bagType: forge.pki.oids.certBag })[forge.pki.oids.certBag][0];
 
@@ -106,32 +65,98 @@ function extractPrivateKeyAndCertificate(pfx) {
   return { privateKey, certificate };
 }
 
-function saveFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem) {
+function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem) {
   const certificadoFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.crt`);
   const chavePrivadaFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.key`);
 
+  if (fs.existsSync(certificadoFilePath) || fs.existsSync(chavePrivadaFilePath)) {
+    if (fs.existsSync(certificadoFilePath)) {
+      console.log(`Nao foi possivel salvar ${certificadoFilePath} porque o arquivo ja existe.`);
+    }
+    if (fs.existsSync(chavePrivadaFilePath)) {
+      console.log(`Nao foi possivel salvar ${chavePrivadaFilePath} porque o arquivo ja existe.`);
+    }
+    return; 
+  }
+
+  console.log('\nSalvando arquivo CRT...');
   fs.writeFileSync(certificadoFilePath, certificadoPem);
+
+  console.log('\nSalvando arquivo PFX...');
   fs.writeFileSync(chavePrivadaFilePath, chavePrivadaPem);
 
   console.log('\nCertificado salvo em:', certificadoFilePath);
   console.log('\nChave privada salva em:', chavePrivadaFilePath);
 }
 
-function covertPfx(pfxFilePath, pfxFileName, pfxPassword) {
+function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
+  console.log('\nIniciando conversao de PFX para CRT e KEY...');
   const folderPath = createFolder();
-  const pfxData = readPfxFile(pfxFilePath);
+
+  console.log('\nLendo arquivo PFX...');
+  const pfxData = readFile(pfxFilePath);
+
   const pfx = parsePfxData(pfxData,pfxPassword);
 
-  
   const { privateKey, certificate } = extractPrivateKeyAndCertificate(pfx);
   const certificadoPem = forge.pki.certificateToPem(certificate);
   const chavePrivadaPem = forge.pki.privateKeyToPem(privateKey);
-  saveFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem);
+  saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem);
  
 }
 
-function covertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
+
+// --------------------------------------------------------------------------- 
+
+
+function convertToPemObjects(crtData, keyData) {
+  console.log('\nConvertendo certificado para formato compreensível...');
+  const certificate = forge.pki.certificateFromPem(crtData.toString());
+  const privateKey = forge.pki.privateKeyFromPem(keyData.toString());
+  return {certificate, privateKey};
+}
+
+function createPfxDer(privateKey, certificate, crtPassword) {
+  console.log('\nCriando arquivo PFX...');
+  const p12Asn1 = forge.pkcs12.toPkcs12Asn1(
+    privateKey,
+    certificate,
+    crtPassword
+  );
+
+  return forge.asn1.toDer(p12Asn1).getBytes();
+}
+
+function savePfxFile(p12Der, folderPath, crtFileName) {
+  const pfxFilePath = path.join(folderPath, `${crtFileName.replace(/\.crt$/, '')}.pfx`);
   
+  if (fs.existsSync(pfxFilePath)) {
+    console.log(`Nao foi possivel salvar ${pfxFilePath} porque o arquivo ja existe.`);
+    return;
+  }
+
+  console.log('\nSalvando arquivo PFX...');
+  fs.writeFileSync(pfxFilePath, p12Der, 'binary');
+
+  console.log('\nPFX salvo em:', pfxFilePath);
+}
+
+function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtPassword) {
+  console.log('\nIniciando conversao de CRT para PFX...');
+  
+  const folderPath = createFolder();
+
+  console.log('\nLendo arquivo CRT...');
+  const crtData = readFile(crtFilePath);
+  
+  console.log('\nLendo arquivo KEY...');
+  const keyData = readFile(crtKeyFilePath);
+
+  const { certificate, privateKey } =  convertToPemObjects(crtData, keyData);
+
+  const p12Der = createPfxDer(privateKey, certificate, crtPassword);
+  
+  savePfxFile(p12Der, folderPath, crtFileName);
 }
 
 function createFolder() {

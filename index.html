@@ -55,10 +55,10 @@
             const crtKeyFile = document.getElementById('crtKeyInput').files[0];
             const crtPassword = document.getElementById('crtPassword').value;
 
-            const crtFilePath = crtFile.path;
-            const crtFileName = crtFile.name;
-            const crtKeyFilePath = crtKeyFile.path;
-            const crtKeyFileName = crtKeyFile.name;
+            const crtFilePath =  crtFile !== undefined ? crtFile.path : null;
+            const crtFileName =  crtFile !== undefined ? crtFile.name : null;
+            const crtKeyFilePath = crtKeyFile ? crtKeyFile.path : null;
+            const crtKeyFileName = crtKeyFile ? crtKeyFile.name : null;
         
             if (crtFile && crtKeyFile) {
                 window.ipcRender.send('verifyCrtToPfx', {

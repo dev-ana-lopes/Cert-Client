@@ -82,7 +82,7 @@ electronIpcMain.on('verifyCrtToPfx', (event, files) => {
 });
 
 services.eventEmitter.on('invalidFile', (data) => {
-    console.log('\nMOSTRA POP UP DE AVISO');
+        console.log('\nMOSTRA POP UP DE AVISO');
     if (data.crtFileName && data.crtKeyFileName) {
         console.log('\nArquivo invalido do tipo CRT:', data.crtFileName, 'e KEY:', data.crtKeyFileName);
     } else {
@@ -91,7 +91,7 @@ services.eventEmitter.on('invalidFile', (data) => {
 });
 
 services.eventEmitter.on('invalidPassword', (data) => {
-    console.log('\nMOSTRA POP UP DE AVISO');
+        console.log('\nMOSTRA POP UP DE AVISO');
     if (data.pfxPassword) {
         console.log('\nSenha invalida para arquivo PFX:', data.pfxPassword);
     } else if (data.crtPassword) {

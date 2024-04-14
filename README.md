@@ -18,14 +18,13 @@ behavior to [coc@electronjs.org](mailto:coc@electronjs.org).
 ## Instalação/Pacotes nescessarios
 
 Para instalar os recursos nescessarios para usar nosso aplicativo voce precisa baixar esses recursos em sua maquina : 
-obrigatorios--
+obrigatorios:
 NODE: 21.7.1 ou maior 
 NPM: 10.5.0 ou maior 
 
 Opcional
 NVM: 1.1.12 ou maior 
-
-* Windows:
+## Windows:
 
 * Node:
 ```sh
@@ -44,8 +43,7 @@ Feito isso para rodar o projeto basta usar esse comando no prompt de comando:
 npm install
 npm start
 ```
-
-* Linux:
+## Linux:
 * Node:
 ```sh
 [Site do Node.js ](https://nodejs.org/en/download)

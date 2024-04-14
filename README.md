@@ -72,27 +72,26 @@ npm start
 
 Essas são as plataformas/sistemas operacionais que nosso aplicativo funciona sem problemas.
 
-* Aqui vai dizer em que plataformas roda a porra do projeto provavelmente em tudo mais tem que testar fds
-*ai bota um topico pra cada 1 tipo de plataforma igual ai em baixo
-* Linux: The prebuilt binaries of Electron are built on Ubuntu 20.04. They have also been verified to work on:
-  * Ubuntu 18.04 and newer
-  * Fedora 32 and newer
-  * Debian 10 and newer
+* Windows : Todos os sistemas operacionais Windows a partir do Windows 10 para cima funcionão normalmente
+
+* Linux:  Todos os sistemas operacionais a seguir funcionam sem problemas:
+  * Ubuntu 23.00 ou maior 
+  * Fedora 32 ou maior 
+  * Debian 10 ou maior 
 
 
 ## Documentação
 
 * [electronjs.org/docs](https://electronjs.org/docs) - Documento de requisitos
-* [electron/fiddle](https://github.com/electron/fiddle) - se quiser outro copia e cola o codigo ai 
 
 ## Quem fez
 
 * Quer saber quem fez essa projeto existir?
-  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
-  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
-  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai 
-  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai
-  * [GItHub](https://electronjs.org/docs) - Bota o nome e link do github dos corno ai
+  * [GItHub](https://github.com/Vitor-Gabriel-KR) -kroshaResheniye / Vitor-Gabriel-KR
+  * [GItHub](https://github.com/D13YSON) - Dieyson / D13YSON
+  * [GItHub](https://github.com/delvecch1o) - Rodrigo Pinheiro / delvecch1o
+  * [GItHub](https://github.com/nickoolaz) -Nicolas Araujo / nickoolaz
+  * [GItHub](https://github.com/dev-ana-lopes) - Ana Lopes / dev-ana-lopes
 
 ## License
 

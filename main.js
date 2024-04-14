@@ -4,6 +4,7 @@ const electronBrowserWindow = require('electron').BrowserWindow;
 const electronIpcMain = require('electron').ipcMain;
 const nodePath = require("path");
 const services = require('./services');
+const { dialog } = require('electron');
 
 let window;
 
@@ -81,22 +82,51 @@ electronIpcMain.on('verifyCrtToPfx', (event, files) => {
     }
 });
 
+electronIpcMain.on('verifyInputs', () => {
+    dialog.showMessageBox({
+        title: 'Aviso !!',
+        message: 'Verifique se os arquivos estão adicionados corretamente',
+        buttons: ['OK']
+    });
+});
+
 services.eventEmitter.on('invalidFile', (data) => {
-        console.log('\nMOSTRA POP UP DE AVISO');
-    if (data.crtFileName && data.crtKeyFileName) {
-        console.log('\nArquivo invalido do tipo CRT:', data.crtFileName, 'e KEY:', data.crtKeyFileName);
-    } else {
-        console.log('\nArquivo invalido do tipo PFX:', data.pfxFileName);
-    }
+    const message = data.crtFileName && data.crtKeyFileName ?
+    `A entrada espera receber um .CRT, mas esta recebendo o tipo: ${data.crtFileName}
+     \ne a entrada espera receber um .KEY mas esta recebendo o tipo: ${data.crtKeyFileName}` :
+    `A entrada espera receber um .PFX, mas esta recebendo o tipo: ${data.pfxFileName}`;
+
+    dialog.showMessageBox(null, {
+        title: 'Arquivo Inválido',
+        message: message,
+        buttons: ['OK']
+    });
 });
 
 services.eventEmitter.on('invalidPassword', (data) => {
-        console.log('\nMOSTRA POP UP DE AVISO');
+    let message;
     if (data.pfxPassword) {
-        console.log('\nSenha invalida para arquivo PFX:', data.pfxPassword);
-    } else if (data.crtPassword) {
-        console.log('\nSenha invalida para arquivo CRT:', data.crtPassword);
+        message = `Este arquivo esperava uma senha, mas a senha digitada inválida para arquivo PFX:`;
     } else {
-        console.log('\nSenha vazia invalida');
+        message = 'Senha vazia !!';
     }
+
+    dialog.showMessageBox(null, {
+        title: 'Senha Inválida',
+        message: message,
+        buttons: ['OK'],
+    });
+});
+
+services.eventEmitter.on('duplicate', (data) => {
+    console.log("\nDATA:0",data);
+    const message = data.crtFileName && data.crtKeyFileName ?
+    `Você já fez uma conversão usando o arquivo ${data.crtFileName} e ${data.crtKeyFileName} para gerar um arquivo PFX !!!` :
+    `Você já fez uma conversão usando o arquivo ${data.pfxFileName} para gerar um arquivo CRT e KEY !!!`;
+   
+    dialog.showMessageBox(null, {
+        title: 'Aviso',
+        message: message,
+        buttons: ['OK'],
+    });
 })

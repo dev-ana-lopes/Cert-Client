@@ -9,8 +9,8 @@
         <h1>Conversor PFX para CRT + KEY</h1>
         <p>Selecione o arquivo PFX:</p>
         <input type="file" id="pfxInput" accept=".pfx"><br><br>
-        <p>Digitea a senha do PFX:</p>
-        <input type="password" id="pfxPassword" placeholder="Senha">
+        <p>Digite a senha de seu arquivo PFX:</p>
+        <input type="password" id="pfxPassword" placeholder="Senha" onkeypress="validarSenha(event)">
         <br><br>
         <button onclick="startConvertPfxToCrt()">Converter</button>
         <p id="result"></p>
@@ -20,8 +20,8 @@
         <input type="file" id="crtInput" accept=".crt"><br><br>
         <p>Selecione o arquivo KEY:</p>
         <input type="file" id="crtKeyInput" accept=".key"><br><br>
-        <p>Digitea a senha do CRT:</p>
-        <input type="password" id="crtPassword" placeholder="Senha">
+        <p>Digite a sua nova senha para seu PFX:</p>
+        <input type="password" id="crtPassword" placeholder="Senha" onkeypress="validarSenha(event)">
         <br><br>
         <button onclick="startConvertCrtAndKeyToPfx()">Converter</button>
         <p id="result"></p>
@@ -45,12 +45,11 @@
                 document.getElementById('pfxInput').value = '';
                 document.getElementById('pfxPassword').value = '';
             } else {
-                console.log("verifique os arquivos do innput");
+                window.ipcRender.send('verifyInputs');
             }
         }
 
         function startConvertCrtAndKeyToPfx() {
-        
             const crtFile = document.getElementById('crtInput').files[0];
             const crtKeyFile = document.getElementById('crtKeyInput').files[0];
             const crtPassword = document.getElementById('crtPassword').value;
@@ -73,9 +72,8 @@
                 document.getElementById('crtKeyInput').value = '';
                 document.getElementById('crtPassword').value = '';
             } else {
-                console.log("verifique os arquivos do innput");
+              window.ipcRender.send('verifyInputs');
             }
-        
         }
 
     </script>

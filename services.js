@@ -14,7 +14,7 @@ function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword) {
 
 function checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
   if (isCrt(crtFileName) && isKey(crtKeyFileName)) {
-    convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtPassword);
+    convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName,crtPassword);
   } else {
     eventEmitter.emit('invalidFile', { crtFileName, crtKeyFileName });
   }
@@ -70,13 +70,12 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
   const chavePrivadaFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.key`);
 
   if (fs.existsSync(certificadoFilePath) || fs.existsSync(chavePrivadaFilePath)) {
-    if (fs.existsSync(certificadoFilePath)) {
-      console.log(`Nao foi possivel salvar ${certificadoFilePath} porque o arquivo ja existe.`);
-    }
-    if (fs.existsSync(chavePrivadaFilePath)) {
-      console.log(`Nao foi possivel salvar ${chavePrivadaFilePath} porque o arquivo ja existe.`);
-    }
-    return; 
+    if (fs.existsSync(certificadoFilePath) && fs.existsSync(chavePrivadaFilePath)) {
+      console.log("\n",`Nao foi possivel salvar ${certificadoFilePath} porque o arquivo ja existe.`);
+      console.log("\n",`Nao foi possivel salvar ${chavePrivadaFilePath} porque o arquivo ja existe.`);
+      eventEmitter.emit('duplicate',{pfxFileName});
+      return; 
+    } 
   }
 
   console.log('\nSalvando arquivo CRT...');
@@ -102,7 +101,6 @@ function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
   const certificadoPem = forge.pki.certificateToPem(certificate);
   const chavePrivadaPem = forge.pki.privateKeyToPem(privateKey);
   saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem);
- 
 }
 
 
@@ -110,7 +108,7 @@ function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
 
 
 function convertToPemObjects(crtData, keyData) {
-  console.log('\nConvertendo certificado para formato compreensível...');
+  console.log('\nConvertendo certificado para formato compreensivel...');
   const certificate = forge.pki.certificateFromPem(crtData.toString());
   const privateKey = forge.pki.privateKeyFromPem(keyData.toString());
   return {certificate, privateKey};
@@ -127,11 +125,12 @@ function createPfxDer(privateKey, certificate, crtPassword) {
   return forge.asn1.toDer(p12Asn1).getBytes();
 }
 
-function savePfxFile(p12Der, folderPath, crtFileName) {
+function savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName) {
   const pfxFilePath = path.join(folderPath, `${crtFileName.replace(/\.crt$/, '')}.pfx`);
   
   if (fs.existsSync(pfxFilePath)) {
     console.log(`Nao foi possivel salvar ${pfxFilePath} porque o arquivo ja existe.`);
+    eventEmitter.emit('duplicate',{ crtFileName, crtKeyFileName });
     return;
   }
 
@@ -141,7 +140,7 @@ function savePfxFile(p12Der, folderPath, crtFileName) {
   console.log('\nPFX salvo em:', pfxFilePath);
 }
 
-function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtPassword) {
+function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
   console.log('\nIniciando conversao de CRT para PFX...');
   
   const folderPath = createFolder();
@@ -156,7 +155,7 @@ function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtPassword) {
 
   const p12Der = createPfxDer(privateKey, certificate, crtPassword);
   
-  savePfxFile(p12Der, folderPath, crtFileName);
+  savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName);
 }
 
 function createFolder() {

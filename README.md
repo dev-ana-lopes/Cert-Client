@@ -1,8 +1,5 @@
 ![Cert-Client Logo](https://cdn.discordapp.com/attachments/1105276174814421122/1228785695632527470/Captura_de_tela_2024-04-13_161439-transformed-removebg-preview.png?ex=662d4edb&is=661ad9db&hm=0b3ccfd66c8e03a1e4ac37261347386bf38a095230aabd099039db4dbb1684f3&)
 
-[![CircleCI Build Status](https://circleci.com/gh/electron/electron/tree/main.svg?style=shield)](https://circleci.com/gh/electron/electron/tree/main)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/4lggi9dpjc1qob7k/branch/main?svg=true)](https://ci.appveyor.com/project/electron-bot/electron-ljo26/branch/main)
-[![Electron Discord Invite](https://img.shields.io/discord/745037351163527189?color=%237289DA&label=chat&logo=discord&logoColor=white)](https://discord.gg/electronjs)
 
 :memo: Aqui nessa area fala sobre a porra do projeto enrola ai pra dar as linha e bota uns link pra tecnospeed ai fds tmj
 The Electron framework lets you write cross-platform desktop applications
@@ -21,18 +18,55 @@ behavior to [coc@electronjs.org](mailto:coc@electronjs.org).
 ## Instalação/Pacotes nescessarios
 
 Para instalar os recursos nescessarios para usar nosso aplicativo voce precisa baixar esses recursos em sua maquina : 
+obrigatorios--
+NODE: 21.7.1 ou maior 
+NPM: 10.5.0 ou maior 
 
-* A porra do nome do arquivo 
+Opcional
+NVM: 1.1.12 ou maior 
+
+* Windows:
+
+* Node:
 ```sh
-Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
+[Site do Node.js ](https://nodejs.org/en/download)
 ```
-* AI copia e colar se precisar de mais de 1 e edita 
+* NPM: 
 ```sh
-Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
+npm install
 ```
-* ai faz uma aba pros comando linux tambem 
+* NVM: 
 ```sh
-Bota a porra dos comando em ordem e dizer o que e cada 1 tmj
+[Site para baixar o NVM ](https://github.com/coreybutler/nvm-windows/releases)
+```
+Feito isso para rodar o projeto basta usar esse comando no prompt de comando:
+```sh
+npm install
+npm start
+```
+
+* Linux:
+* Node:
+```sh
+[Site do Node.js ](https://nodejs.org/en/download)
+```
+ou 
+```sh
+sudo apt update
+sudo apt install nodejs
+```
+* NPM -Ubuntu/Debian-: 
+```sh
+sudo apt install npm
+```
+* NVM: 
+```sh
+[Site para baixar o NVM ](https://www.treinaweb.com.br/blog/instalando-e-gerenciando-varias-versoes-do-node-js-com-nvm#google_vignette)
+```
+Feito isso para rodar o projeto basta usar esse comando no prompt de comando:
+```sh
+npm install
+npm start
 ```
 
 

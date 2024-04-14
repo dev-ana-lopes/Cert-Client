@@ -79,7 +79,7 @@ Essas são as plataformas/sistemas operacionais que nosso aplicativo funciona se
 
 ## Documentação
 
-* [electronjs.org/docs](https://electronjs.org/docs) - Documento de requisitos
+* [Google Docs](https://docs.google.com/document/d/1kjl30448vsoa45gwtAsBqH7xAKObDRxp/edit) - Documento de requisitos
 
 ## Quem fez
 

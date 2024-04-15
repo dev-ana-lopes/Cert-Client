@@ -1,0 +1,39 @@
+@import "../global/style.css";
+  
+.container-fluid {
+  padding: 20px;
+  display: flex;
+  }
+
+  .docs-area {
+    width: 100%;
+    height: 418px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: dashed;
+    border-color: #3b196d;
+    border-width: 2px;
+    background-color: var(--cor-terciaria);
+    border-radius: 5px;
+
+    .icon-upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    h4 {
+      text-align: center;
+      color: #3b196d;
+    }
+
+  }

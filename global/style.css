@@ -110,9 +110,10 @@ a {
 .bg-btn-out {
     border: var(--text-color) solid 1px;
     border-radius: 30px;
+    
     a {
         color: var(--text-color);
-    }
+    } 
 }
 
 .bg-btn-white {

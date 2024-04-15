@@ -15,7 +15,7 @@
             <div class="menu-right">
                 <ul class="nav col-6 col-md-auto mb-2 justify-content-end mb-md-0">
                     <li><a href="../index.html" class="px-2 tx-color-white">Início</a></li>
-                    <li><a href="https://www.electronjs.org/pt/docs/latest/" class="px-2 tx-color-white">Documentação</a></li>
+                    <li><a href="https://github.com/dev-ana-lopes/Cert-Client" class="px-2 tx-color-white">Documentação</a></li>
                     <li>
                         <div class="dark-mode-toggle">
                         <input type="checkbox" id="dark-mode-toggle-checkbox">
@@ -27,11 +27,35 @@
         </nav>
     </header>
     <main>
-        <div>
-            <div>
-                <h1>Selecione o tipo de conversão desejada</h1>
+        <div class="container">
+            <div class="row border-bottom">
+                <h2 class="text-align-center">Selecione o tipo de conversão desejada</h2>
             </div>
-            <div class="btn"><a href="/upload/upload.html"></a>Próximo</div>
+            <div class="forms">
+                <form>
+                    <label class="itens-forms">
+                      <input type="radio" name="opcao" value="pfx-crtkey" required> PFX para CRT + KEY
+                    </label>
+                    <br>
+                    <label class="itens-forms">
+                      <input type="radio" name="opcao" value="crtkey-pfx"> CRT + KEY para PFX
+                    </label>
+                    <br>
+                    <label class="">
+                        <label>Senha do certificado: </label>
+                        <input type="password" name="password" required> 
+                      </label>
+                      <br>
+                    <label>
+                        <input type="checkbox" name="aceito_termos" required>
+                        <a>Li e aceito o termos de responsabilidade</a>
+                    </label>
+                    <br>
+                    <button class="mt-3 btn bg-btn" type="submit">
+                        <a href="../upload/upload.html">Proximo</a> 
+                    </button>
+                </form>
+            </div>
         </div>
     </main>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

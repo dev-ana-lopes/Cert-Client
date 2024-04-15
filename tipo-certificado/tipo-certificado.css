@@ -1,1 +1,41 @@
 @import "../global/style.css";
+
+.text-align-center {
+    text-align: center;
+}
+
+.forms{
+    margin: 38px;
+    padding-left: 82px;
+    padding-right: 82px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    label{
+        display: flex;
+        gap: 8px;
+    }
+    .itens-forms{
+        font-size: 28px;
+    }
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: var(--bd-violet-bg);
+    --bs-tooltip-color: var(--bs-white);
+  }
+
+.bg-btn{ 
+    border: 1px solid white;
+    background-color: white;
+    color: var(--cor-primaria);
+    color: purple;
+    font-size: 24px;
+    border-radius: 30px;
+    a {
+        color: var(--cor-primaria);
+        text-decoration: none;
+    }
+}

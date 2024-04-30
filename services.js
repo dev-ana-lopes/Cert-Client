@@ -39,8 +39,14 @@ function readFile(filePath) {
 }
 
 function parsePfxData(pfxData, pfxPassword) {
-  console.log('\nConvertendo certificado para formato compreensível...');
-  const pfxAsn1 = forge.asn1.fromDer(pfxData.toString('binary'));
+  console.log('\nConvertendo certificado para formato compreensivel...');
+  let pfxAsn1;
+  try {
+    pfxAsn1 = forge.asn1.fromDer(pfxData.toString('binary'));
+  } catch (ex) {
+    eventEmitter.emit('falseConvert');
+  }
+
   try {
     return forge.pkcs12.pkcs12FromAsn1(pfxAsn1, pfxPassword);
   } catch(ex) {
@@ -95,8 +101,12 @@ function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
   console.log('\nLendo arquivo PFX...');
   const pfxData = readFile(pfxFilePath);
 
-  const pfx = parsePfxData(pfxData,pfxPassword);
+  const pfx = parsePfxData(pfxData, pfxPassword);
 
+  if (pfx === null || pfx === undefined || pfx === true) {
+    return;
+  }
+  console.log("\nHHHHHHHH",pfx)
   const { privateKey, certificate } = extractPrivateKeyAndCertificate(pfx);
   const certificadoPem = forge.pki.certificateToPem(certificate);
   const chavePrivadaPem = forge.pki.privateKeyToPem(privateKey);

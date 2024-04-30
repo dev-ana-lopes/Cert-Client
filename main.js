@@ -129,4 +129,14 @@ services.eventEmitter.on('duplicate', (data) => {
         message: message,
         buttons: ['OK'],
     });
-})
+});
+
+services.eventEmitter.on('falseConvert', () => {
+    console.log("\nFalseConvert:");
+
+    dialog.showMessageBox(null, {
+        title: 'Aviso',
+        message: 'Erro arquivo do tipo invalido',
+        buttons: ['OK'],
+    });
+});

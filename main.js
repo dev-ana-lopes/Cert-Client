@@ -12,7 +12,7 @@ function createWindow() {
     try {
         const window = new electronBrowserWindow({
             width: 800,
-            height: 600,
+            height: 560,
             show: false,
             webPreferences: {
                 nodeIntegration: false,

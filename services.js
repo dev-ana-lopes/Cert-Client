@@ -168,18 +168,41 @@ function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, cr
   savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName);
 }
 
+
+
 function createFolder() {
   const folderName = "Certificados";
-
-  const pathDesktop = path.join(require('os').homedir(),'Desktop');
-
+  const pathDesktop = path.join(require('os').homedir(), 'Desktop');
   const newPathFolder = path.join(pathDesktop, folderName);
 
-  if(!fs.existsSync(newPathFolder)) {
-    fs.mkdirSync(newPathFolder);
+  try {
+    if (!fs.existsSync(newPathFolder)) {
+      fs.mkdirSync(newPathFolder);
+      return newPathFolder;
+    }
+  } catch (error) {
+    console.error('Erro ao criar o diretório Certificados:', error.message);
+    console.log('Tentando criar o diretório Certificados em outro local...');
+
+    const alternativePathDesktop = "C:\\Users\\rodri\\OneDrive\\Área de Trabalho";
+    const alternativeNewPathFolder = path.join(alternativePathDesktop, folderName);
+
+    try {
+      if (!fs.existsSync(alternativeNewPathFolder)) {
+        fs.mkdirSync(alternativeNewPathFolder);
+        return alternativeNewPathFolder;
+      } else {
+        return alternativeNewPathFolder;
+      }
+    } catch (err) {
+      console.error('Erro ao criar o diretório Certificados no diretório alternativo:', err.message);
+      return null; // Retorna nulo para indicar que a criação falhou em ambos os locais
+    }
   }
+
   return newPathFolder;
 }
+
 
 module.exports = {
   checkToConvertPfxToCrt,

@@ -14,7 +14,13 @@ function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword) {
 
 function checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
   if (isCrt(crtFileName) && isKey(crtKeyFileName)) {
-    convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName,crtPassword);
+    try {
+      convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName,crtPassword);
+    } catch (Ex) {
+      if(Ex.message === "Os arrays sao diferentes.") {
+        eventEmitter.emit('filesDoNotMatch');
+      }
+    }
   } else {
     eventEmitter.emit('invalidFile', { crtFileName, crtKeyFileName });
   }
@@ -118,10 +124,13 @@ function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
 
 
 function convertToPemObjects(crtData, keyData) {
-  console.log('\nConvertendo certificado para formato compreensivel...');
+  console.log('\nConvertendo certificado para formato compreensível...');
+
   const certificate = forge.pki.certificateFromPem(crtData.toString());
   const privateKey = forge.pki.privateKeyFromPem(keyData.toString());
-  return {certificate, privateKey};
+  checkedFilesCorrespondence(certificate, privateKey);
+
+  return { certificate, privateKey };
 }
 
 function createPfxDer(privateKey, certificate, crtPassword) {
@@ -162,13 +171,38 @@ function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, cr
   const keyData = readFile(crtKeyFilePath);
 
   const { certificate, privateKey } =  convertToPemObjects(crtData, keyData);
-
   const p12Der = createPfxDer(privateKey, certificate, crtPassword);
   
   savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName);
 }
 
+function checkedFilesCorrespondence(certificate, privateKey) {
+  const arrayCert = extractArray(certificate.publicKey.n);
+  const arrayKey = extractArray(privateKey.n);
+  
+  isSomeLength(arrayCert, arrayKey);
 
+  const isEquals = arrayCert.map((elementoCert, indice) => elementoCert === arrayKey[indice]);
+
+  if (!isEquals.every(e => e === true)) {
+    console.log("Os arrays sao diferentes.");
+    throw Error("Os arrays sao diferentes.");
+  } 
+}
+
+function extractArray(objeto) {
+  if (objeto && objeto.data && Array.isArray(objeto.data)) {
+    console.log("\nArray:", objeto.data);
+    return objeto.data;
+  }
+}
+
+function isSomeLength(arrayCert, arrayKey) {
+  if (arrayCert.length !== arrayKey.length) {
+    console.log("Os arrays têm comprimentos diferentes.");
+    return;
+  }
+}
 
 function createFolder() {
   const folderName = "Certificados";

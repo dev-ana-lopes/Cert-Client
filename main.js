@@ -140,3 +140,11 @@ services.eventEmitter.on('falseConvert', () => {
         buttons: ['OK'],
     });
 });
+
+services.eventEmitter.on('filesDoNotMatch', () => {
+    dialog.showMessageBox(null, {
+        title: 'Aviso',
+        message: 'Os arquvios .CRT e .KEY nao correspondentes entre si, verifique a origem de cada!',
+        buttons: ['OK'],
+    });
+});

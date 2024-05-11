@@ -45,3 +45,20 @@ function startConvertCrtAndKeyToPfx() {
       window.ipcRender.send('verifyInputs');
     }
 }
+
+document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function() {
+        const file = this.files[0];
+        const fileType = this.id.replace('Input', ''); 
+        const spanId = `${fileType}SizeSpan`;
+
+        const spanElement = document.getElementById(spanId);
+
+        if (file) {
+            const fileSize = (file.size / 1024).toFixed(2);
+            spanElement.textContent = `${fileSize} KB`;
+        } else {
+            spanElement.textContent = ''; 
+        }
+    });
+});

@@ -34,7 +34,7 @@
                         <form>
                             <label class="itens-forms">
                                 <div>
-                                    <input type="checkbox" id="check" class="check" name="opcao" value="pfx-crtkey" required/>
+                                    <input type="checkbox" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="logCheckboxClick(this.value)"/>
                                     <label for="check"></label>
                                 </div> 
                                 <img class="img" src="../imagem/pfx.png">                     
@@ -43,7 +43,7 @@
                                 <br>
                             <label class="itens-forms">
                                 <div>
-                                    <input type="checkbox" id="check2" class="check2" name="opcao" value="crtkey-pfx" required/>
+                                    <input type="checkbox" id="check2" class="check2" name="opcao" value="crtkey-pfx" required onclick="logCheckboxClick(this.value)"/>
                                     <label for="check2"></label>
                                 </div>
                                 <img class="img" src="../imagem/key.png">     
@@ -51,11 +51,11 @@
                             </label>       
                                 <br>
                             <div  class="mt-4"> 
-                                <input type="checkbox" name="aceito_termos" required>
+                                <input type="checkbox" id="aceito_termos" name="aceito_termos" required onclick="validate()">
                                 <span class="terms-link">Li e aceito o termos de responsabilidade<span class="required">*</span></span>
                             </div>   
                                 <br>
-                            <button id="btn-proximo" class="next-btn" type="submit" disabled>Próximo</button>
+                            <button id="btn-proximo" class="next-btn" type="button" disabled>Próximo<a href="../upload/upload.html"></a></button>
                         </form>
                         <div class="nuvens">
                             <div class="nuvem-d">

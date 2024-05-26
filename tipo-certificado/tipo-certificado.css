@@ -1,9 +1,22 @@
 @import "../global/style.css";
 
+
+body{
+   font-family: 'Alice';
+   width: auto;
+   height: 650px;
+}
+
 .text-align-center {
     text-align: center;
 }
 
+.bg-gradiente {
+  background: linear-gradient(to bottom left, #A398F9 22%, #927AE7 33%, #8162D4 51%,#927AE7 77%, #947EE9 88%);
+  position: relative;
+  z-index: 1;
+ }
+ 
 .forms{
     margin: 38px;
     padding-left: 82px;
@@ -18,7 +31,9 @@
         gap: 8px;
     }
     .itens-forms{
-        font-size: 28px;
+        font-size: 23px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;  
     }
 }
 
@@ -38,4 +53,231 @@
         color: var(--cor-primaria);
         text-decoration: none;
     }
+}
+
+.nav-style {
+    font-family: 'Alice';
+    color:white ;
+    background-color:#6F42C1; 
+    padding: 8px 8px;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.5);
+}
+
+.tx-color-white {
+    color: white; 
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: font-size 0.3s, text-decoration 0.3s;
+}
+
+.tx-color-white:hover,
+.tx-color-white:focus,
+.tx-color-white:active {
+    color: white;
+    text-decoration: underline;
+    font-size: 1.6em;
+}
+
+.size-logo {
+    width: 150px;
+    margin-top: 3px;
+}
+
+.title {
+    width: 390px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    font-size: 1.5em;
+    font-family: 'Alice';
+}
+
+.terms-link {
+    font-family: 'Alice';
+    font-size: medium;
+}
+
+.custom-mt {
+    margin-top: -10%;
+}
+
+.next-btn{
+    font-family: 'Open Sans', sans-serif;   
+    width: 100%;
+    height: 60px;
+    font-size: 25px;
+    color: var(--text-color);
+    border: var(--text-color) solid 3px;
+    border-radius: 30px;
+    background-color:#6F42C1;
+    font-weight: bold;      
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.next-btn:disabled {
+    background-color: transparent;
+    color: rgba(247, 244, 244, 0.792); 
+    border-color: rgba(255, 255, 255, 0.5); 
+}
+
+.required {
+    color: red;
+    margin-left: 7px;
+}
+
+.center {
+   
+  }
+
+  .check {
+    visibility: hidden;
+    width: 0.1px;
+    height: 0.1px;
+  }
+
+  .check + label {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    box-sizing: border-box;
+    transition: all 0.7s ease;
+  }
+
+  .check:checked + label {
+    border-width: 5px;
+    background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
+    animation: jelly 0.5s ease-in-out;
+  }
+
+  @keyframes jelly {
+    0% {
+      transform: scale(1, 1);
+    }
+    25% {
+      transform: scale(1.5, 0.75);
+    }
+    35% {
+      transform: scale(0.75, 1.5);
+    }
+    50% {
+      transform: scale(1.25, 0.75);
+    }
+    65% {
+      transform: scale(0.75, 1.25);
+    }
+    75% {
+      transform: scale(1.25, 0.75);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+}
+
+.center {
+   
+}
+
+.check2 {
+  visibility: hidden;
+  width: 0.1px;
+  height: 0.1px;
+}
+
+.check2 + label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: all 0.7s ease;
+}
+
+.check2:checked + label {
+  border-width: 5px;
+  background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
+  animation: jelly 0.5s ease-in-out;
+}
+
+@keyframes jelly {
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(1.5, 0.75);
+  }
+  35% {
+    transform: scale(0.75, 1.5);
+  }
+  50% {
+    transform: scale(1.25, 0.75);
+  }
+  65% {
+    transform: scale(0.75, 1.25);
+  }
+  75% {
+    transform: scale(1.25, 0.75);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.itens-forms {
+    display: flex;
+    align-items: center; 
+}
+
+.itens-forms input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+.margin{
+    margin-top: 11%;
+}
+
+.img{
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;;
+}
+
+.sol{
+  width: 150px;
+  height: 150px;
+}
+
+.sol-container{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.nuvem-di{
+  margin-top: 63%;
+  width: 400px;
+}
+
+.nuvem-d{
+  position: absolute;
+  top: 2px;
+  right: 0;
+}
+
+.nuvem-e{
+  position: absolute;
+  top: 36px;
+  left: 0;
+}
+
+.nuvem-es{
+  margin-top: 33%;
+  width: 462px;
+  height: 462px;
+}
+
+.nuvens {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

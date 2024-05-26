@@ -98,13 +98,13 @@ header {
 
 /* ------------ estilização da página index.html ------------ */
 #logo-index {
-  width: 344px;
+  width: 487px;
 }
 
 /* personalização dos botões */
 /* botão sem preenchimento e com bordas brancas */
 #bg-btn-out {
-    border: var(--text-color) solid 1px;
+    border: var(--text-color) solid 3px;
     border-radius: 30px;
     
     a {
@@ -118,7 +118,7 @@ header {
     background-color: var(--text-color);
     border-radius: 30px;
     a {
-        color: var(--cor-primaria);
+        color: black;
         text-decoration: none;
     }
 }
@@ -199,4 +199,11 @@ body{
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+}
+
+.size-logo {
+  width: 30%;
+  height: 30%;
+  margin-top: 18px;
+  margin-left: 18px;
 }

@@ -62,3 +62,13 @@ document.querySelectorAll('input[type="file"]').forEach(input => {
         }
     });
 });
+
+
+const { shell } = require('electron');
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnOut = document.getElementById('bg-btn-out');
+    btnOut.addEventListener('click', () => {
+        shell.openExternal('https://github.com/dev-ana-lopes/Cert-Client');
+    });
+});

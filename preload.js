@@ -6,7 +6,8 @@ const ipc = {
         'send': [
             'verifyPfxToCrt', 
             'verifyCrtToPfx',
-            'verifyInputs'
+            'verifyInputs',
+            'openExternalLink'
         ],
         'receive': [],
         'sendReceive': []
@@ -32,6 +33,9 @@ contextBridge.exposeInMainWorld(
             if (validChannels.includes(channel)) {
                 return ipcRenderer.invoke(channel, args);
             }
+        },
+        openExternalLink: (url) => {
+            ipcRenderer.send('openExternalLink', url);
         }
     }
 );

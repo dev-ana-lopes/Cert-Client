@@ -1,59 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CertClient</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="global/style.css">
-    <link rel="shortcut icon" href="imagem/icon.svg" type="image/x-icon">
-    
-</head>
-<body class="bg-gradiente">
-    <div class="navbar">
-        <div class="logo">
-            <div class="logo-icon">
-                CertClient
-            </div>
-        </div>
-        <div id="menu" class="nav-items">
-            <div class="item">
-                <img src="../Cert-Client/imagem/remove-circle-outline.svg" alt="remove-circle-outline">
-            </div>
-            <div class="item">
-                <img src="../Cert-Client/imagem/browsers-outline.svg" alt="browsers-outline">
-            </div>
-            <div class="item">
-                <img src="../Cert-Client/imagem/close-circle-outline.svg" alt="close-circle-outline">
-            </div>
-        </div>
-    </div>
-    <header class="pd-body">
-        <img class="selector" src="imagem/tecnospeed-white 1.svg" alt="">
-    </header>
-    <main class="pd-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 align-div">
-                    <h1>CertClient</h1>
-                    <p>Potencialize a segurança ao converter seus próprios certificados internos, mitigando assim os riscos inerentes ao envolvimento com prestadores de serviços externos!</p>
-                    <div id="btn-gpm">
-                        <div>
-                            <button id="bg-btn-white" class="btn"><a href="tipo-certificado/tipo-certificado.html">Próximo</a></button>
-                        </div>
-                        <div>
-                            <button id="bg-btn-out" class="btn"><a href="https://github.com/dev-ana-lopes/Cert-Client">Documentação</a></button>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CertClient</title>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="global/style.css">
+        <link rel="stylesheet" href="index.css">
+        <link rel="shortcut icon" href="imagem/icon.svg" type="image/x-icon">
+        
+    </head>
+    <body class="bg-gradiente">
+        <header class="pd-body">
+            <img class="selector size-logo" src="imagem/tecnospeed-white 1.svg">
+        </header>
+        <main class="pd-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 align-div">
+                        <h1 class="h2-font-size">CertClient</h1>
+                        <p class="font-size">Potencialize a segurança ao converter seus próprios certificados internos, mitigando assim os riscos inerentes ao envolvimento com prestadores de serviços externos!</p>
+                        <div id="btn-gpm" class="mt-md-5">
+                            <div>
+                                <button id="bg-btn-white" class="btn next-btn"><a href="tipo-certificado/tipo-certificado.html">Próximo</a></button>
+                            </div>
+                            <div>
+                                <button id="bg-btn-out" class="btn docs-btn custom-button">Documentação</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <img id="logo-index" class="img" src="imagem/img-index.svg" alt="Imagem ilustrativa do index">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <img id="logo-index" class="selector" src="imagem/img-index.svg" alt="Imagem ilustrativa do index">
-                </div>
-            </div>
-        </div>   
-    </main>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="main.js"></script>
-    <script src="index.js"></script>
-</body>
-</html>
+            </div>   
+        </main>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="main.js"></script>
+        <script src="index.js"></script>
+        <script src="preload.js"></script>
+    </body>
+    </html>

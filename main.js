@@ -11,12 +11,14 @@ let window;
 function createWindow() {
     try {
         const window = new electronBrowserWindow({
-            width: 800,
-            height: 560,
+            width: 1050,
+            height: 700,
             show: false,
+            resizable: false, 
+            maximizable: false,
             webPreferences: {
-                nodeIntegration: false,
-                contextIsolation: true,
+                nodeIntegration: true,
+                contextIsolation: false,
                 preload: nodePath.join(__dirname, 'preload.js')
             }
         });

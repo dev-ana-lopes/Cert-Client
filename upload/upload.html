@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="upload.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
     <link rel="shortcut icon" href="imagem/icon.svg" type="image/x-icon">
     <title>CertClient</title>
 </head>
+
 <body class="bg-gradiente">
     <header>
-        <nav class="d-flex justify-content-between align-items-center">
-            <img class="nav col-6 col-md-auto mb-2 justify-content-start mb-md-0" src="../imagem/tecnospeed-white 1.svg" alt="">
+        <nav class="d-flex justify-content-between align-items-center nav-style">
+            <img class="size-logo" src="../imagem/tecnospeed-white 1.svg">
             <div class="menu-right">
                 <ul class="nav col-6 col-md-auto mb-2 justify-content-end mb-md-0">
                     <li><a href="../index.html" class="px-2 tx-color-white">Início</a></li>
-                    <li><a href="https://github.com/dev-ana-lopes/Cert-Client" class="px-2 tx-color-white">Documentação</a></li>
-                    <li>
-                        <div class="dark-mode-toggle">
-                        <input type="checkbox" id="dark-mode-toggle-checkbox">
-                        <label for="dark-mode-toggle-checkbox"></label>
-                        </div>
-                    </li>
+                    <li><a href="../tipo-certificado/tipo-certificado.html" class="px-2 tx-color-white">Tipo de
+                            arquivo</a></li>
+                    <li><a id="docs" class="px-2 tx-color-white">Documentação</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     <main>
+        <div class="sol-container">
+            <img src="../imagem/Sol_2.png" class="sol">
+        </div>
         <div class="container-fluid">
             <div class="docs-area">
                 <div class="align-items-center justify-content-center">
-                    <div class="icon-upload">
-                        <img class="img" src="../imagem/upload.png" alt="icone de upload">
-                    </div>
-                    <div>
-                        <h4>Clique aqui para adicionar o certificado a ser convertido.</h4>
+                    <div class="drop-area" id="dropArea">
+                        <div class="icon-upload">
+                            <div>
+                                <img id="img1" class="sizeFile" src="../imagem/file.png">
+                                <span id="span1"></span>
+                            </div>
+                            <div>
+                                <img id="img2" class="sizeFile" src="../imagem/file.png">
+                                <span id="span2"></span>
+                            </div>
+                        </div>
+                        <div class="icon-upload">
+                            <img class="img" src="../imagem/upload.png" alt="ícone de upload">
+                        </div>
+                        <div class="icon-upload">
+                            <button  id="upload-button" class="upload-button mt-3 mb-3" onclick="openInputFiles()">Abrir arquivo</button>
+                        </div>
+                       <div class="icon-upload">
+                            <h2 id="fonte" class="fonte">Ou arraste e solte em qualquer lugar</h2>
+                       </div>
                     </div>
                 </div>
             </div>
+            <button id="convert" class="btn-convert" type="button" disabled>Converter</button>
+        </div>
+        <div class="nuvens">
+            <div class="nuvem-d">
+                <img src="../imagem/Nuvem-Direita_2.png" class="nuvem-di">
+            </div>
+            <div class="nuvem-e">
+                <img src="../imagem/Nuven-esquerda_2.png" class="nuvem-es">
+            </div>
         </div>
     </main>
+    <input type="file" id="pfxInput" accept=".pfx" style="display:none">
+    <input type="file" id="crtInput" accept=".crt,.key" style="display:none">
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="upload.js"></script>
 </body>
+
 </html>

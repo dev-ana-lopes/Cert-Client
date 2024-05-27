@@ -1,12 +1,20 @@
 @import "../global/style.css";
-  
+
+body{
+  font-family: 'Alice';
+  width: auto;
+  height: 650px;
+  position: relative;
+}
+
 .container-fluid {
   padding: 20px;
   display: flex;
+  z-index: 1;
   }
 
   .docs-area {
-    width: 100%;
+    width: 50%;
     height: 418px;
     display: flex;
     flex-direction: column;
@@ -16,6 +24,7 @@
     border-width: 2px;
     background-color: var(--cor-terciaria);
     border-radius: 5px;
+    margin: 38px 17%;
 
     .icon-upload {
       display: flex;
@@ -28,7 +37,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin: 5px auto 0px auto;
       }
+    }
+
+    .upload-button{
+      width: 30%;
+      height: 50px;
+      font-size: 17px;
+      background-color: var(--cor-primaria);
+      color: var(--text-color);
+      border-radius: 30px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
     h4 {
@@ -36,4 +56,131 @@
       color: #3b196d;
     }
 
+    .icon-upload .sizeFile {
+      width: 130px;
+      margin-right: 15px;
+      height: auto;
+      display: none;
+      margin-bottom: 10%;
+    }
+
   }
+
+.bg-gradiente {
+  background: linear-gradient(to bottom left, #A398F9 22%, #927AE7 33%, #8162D4 51%,#927AE7 77%, #947EE9 88%);
+  position: relative;
+  z-index: 1;
+}
+
+.nav-style {
+  font-family: 'Alice';
+  color:white ;
+  background-color:#6F42C1; 
+  padding: 8px 8px;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.5);
+}
+
+.tx-color-white {
+  color: white; 
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: font-size 0.3s, text-decoration 0.3s;
+}
+
+.tx-color-white:hover,
+.tx-color-white:focus,
+.tx-color-white:active {
+  color: white;
+  text-decoration: underline;
+  font-size: 1.6em;
+}
+
+.size-logo {
+  width: 150px;
+  margin-top: 3px;
+}
+
+.sol{
+  width: 170px;
+  height: 170px;
+}
+
+.sol-container{
+  position: absolute;
+  justify-content: flex-start;
+  z-index: 0; 
+}
+
+.nuvem-di{
+  margin-top: 108%;
+  width: 370px;
+}
+
+.nuvem-d{
+  position: absolute;
+  top: 2px;
+  right: 0;
+  z-index: -1;
+}
+
+.nuvem-e{
+  position: absolute;
+  top: 36px;
+  left: 0;
+  z-index: -1;
+}
+
+.nuvem-es{
+  margin-top: 199%;
+  width: 214px;
+  height: 189px;
+}
+
+.nuvens {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.btn-convert{
+  font-family: 'Open Sans', sans-serif;   
+  width: 200px;
+  height: 46px;
+  font-size: 25px;
+  border: var(--text-color) solid 3px;
+  border-radius: 30px;
+  background-color:var(--cor-primaria);
+  font-weight: bold;      
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+}
+
+.btn-convert.enabled {
+  font-weight: normal;  
+  box-shadow: none;
+  color: var(--text-color);
+  margin-top: 39%;
+  margin-left: -11%;
+  z-index: -1;
+}
+
+.btn-convert:disabled {
+  background-color: transparent;
+  color: rgba(247, 244, 244, 0.792); 
+  border-color: rgba(255, 255, 255, 0.5);
+  margin-top: 39%;
+  margin-left: -11%;
+  z-index: -1;
+}
+
+.fonte{
+  font-family: 'Alice';
+  font-size: 20px;
+  color: black;
+}
+
+#span1, #span2 {
+  font-family: 'Alice';
+  color: black;
+  font-size: 20px;
+  margin-right: 40px;
+}

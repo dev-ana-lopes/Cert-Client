@@ -10,12 +10,14 @@ body{
 .container-fluid {
   padding: 20px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 1;
   }
 
   .docs-area {
-    width: 50%;
-    height: 418px;
+    width: 66%;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -64,6 +66,11 @@ body{
       margin-bottom: 10%;
     }
 
+  }
+
+  .password-form {
+    width: 260px;
+    height: 16px;
   }
 
 .bg-gradiente {
@@ -158,8 +165,8 @@ body{
   font-weight: normal;  
   box-shadow: none;
   color: var(--text-color);
-  margin-top: 39%;
-  margin-left: -11%;
+  margin-top: 60px;
+  margin-left: 0%;
   z-index: -1;
 }
 
@@ -167,8 +174,8 @@ body{
   background-color: transparent;
   color: rgba(247, 244, 244, 0.792); 
   border-color: rgba(255, 255, 255, 0.5);
-  margin-top: 39%;
-  margin-left: -11%;
+  margin-top: 60px;
+  margin-left: 0%;
   z-index: -1;
 }
 

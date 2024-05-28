@@ -55,7 +55,22 @@
                     </div>
                 </div>
             </div>
-            <button id="convert" class="btn-convert" type="button" disabled>Converter</button>
+    
+            <!------------------- Antigo forms de senha -----------------
+            <div class="password-form">
+                <form action="/autenticacao" method="post">
+                    <label class="itens-forms">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password" required> 
+                    </label>
+                </form>
+            </div> -->
+            <div class="button">
+                <button id="convert" class="btn-convert" type="button" data-target="#password">Converter</button>
+            </div>
+
+            <!------------------- Adicionar modal de senha aqui  --------------->
+
         </div>
         <div class="nuvens">
             <div class="nuvem-d">
@@ -68,6 +83,8 @@
     </main>
     <input type="file" id="pfxInput" accept=".pfx" style="display:none">
     <input type="file" id="crtInput" accept=".crt,.key" style="display:none">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="upload.js"></script>
 </body>

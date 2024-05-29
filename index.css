@@ -33,7 +33,7 @@
   
   .custom-button:hover {
     background-color: #ffffff; 
-    color: #000000; 
+    color: var(--text-color-dark); 
   }
   
   .custom-button:active {

@@ -2,7 +2,6 @@
 
 
 body{
-  font-family: 'Alice';
   width: auto;
   height: 650px;
 }
@@ -15,6 +14,7 @@ body{
   background: linear-gradient(to bottom left, #A398F9 22%, #927AE7 33%, #8162D4 51%,#927AE7 77%, #947EE9 88%);
   position: relative;
   z-index: 1;
+  margin-bottom: 25px;
  }
  
 .forms{
@@ -98,11 +98,10 @@ body{
 }
 
 .custom-mt {
-  margin-top: -10%;
+  margin-top: 7%;
 }
 
 .next-btn{
-  font-family: 'Open Sans', sans-serif;   
   width: 100%;
   height: 60px;
   font-size: 25px;
@@ -116,7 +115,8 @@ body{
 .next-btn.enabled {
   font-weight: normal;  
   box-shadow: none;
-  color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--cor-primaria);
 }
 
 .next-btn:disabled {
@@ -135,66 +135,13 @@ body{
   margin-left: 7px;
 }
 
-.center {
-   
-  }
-
-  .check {
-    visibility: hidden;
-    width: 0.1px;
-    height: 0.1px;
-  }
-
-  .check + label {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--text-color);
-    border-radius: 50%;
-    box-sizing: border-box;
-    transition: all 0.7s ease;
-  }
-
-  .check:checked + label {
-    border-width: 5px;
-    background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
-    animation: jelly 0.5s ease-in-out;
-  }
-
-  @keyframes jelly {
-    0% {
-      transform: scale(1, 1);
-    }
-    25% {
-      transform: scale(1.5, 0.75);
-    }
-    35% {
-      transform: scale(0.75, 1.5);
-    }
-    50% {
-      transform: scale(1.25, 0.75);
-    }
-    65% {
-      transform: scale(0.75, 1.25);
-    }
-    75% {
-      transform: scale(1.25, 0.75);
-    }
-    100% {
-      transform: scale(1, 1);
-    }
-}
-
-.center {
-   
-}
-
-.check2 {
+.check {
   visibility: hidden;
   width: 0.1px;
   height: 0.1px;
 }
 
-.check2 + label {
+.check + label {
   width: 20px;
   height: 20px;
   border: 2px solid var(--text-color);
@@ -203,7 +150,7 @@ body{
   transition: all 0.7s ease;
 }
 
-.check2:checked + label {
+.check:checked + label {
   border-width: 5px;
   background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
   animation: jelly 0.5s ease-in-out;
@@ -231,6 +178,27 @@ body{
   100% {
     transform: scale(1, 1);
   }
+} 
+
+.check2 {
+  visibility: hidden;
+  width: 0.1px;
+  height: 0.1px;
+}
+
+.check2 + label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: all 0.7s ease;
+}
+
+.check2:checked + label {
+  border-width: 5px;
+  background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
+  animation: jelly 0.5s ease-in-out;
 }
 
 .itens-forms {
@@ -252,19 +220,8 @@ body{
   margin-top: 20px;;
 }
 
-.sol{
-  width: 150px;
-  height: 150px;
-}
-
-.sol-container{
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
 .nuvem-di{
-  margin-top: 63%;
+  margin-top: 274px;
   width: 400px;
 }
 
@@ -285,7 +242,7 @@ body{
 .nuvem-es{
   margin-top: 33%;
   width: 462px;
-  height: 462px;
+  height: 487px;
 }
 
 .nuvens {

@@ -4,6 +4,8 @@
     --cor-secundaria: #927ae7;
     --cor-terciaria: #a398f9;
     --text-color: white;
+    --text-color-dark: #4B2C7B;
+    --font-family: 'Alice';
 }
 
 /* background tela inicial */
@@ -118,7 +120,7 @@ header {
     background-color: var(--text-color);
     border-radius: 30px;
     a {
-        color: black;
+        color: var(--text-color-dark); 
         text-decoration: none;
     }
 }
@@ -137,7 +139,6 @@ header {
 }
 
 body{
-  font-family: 'Alice';
   width: 800px;
   height: 560px;
 

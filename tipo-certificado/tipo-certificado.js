@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.getElementById('termo').addEventListener('click', function(event) {
+    event.preventDefault(); 
+    window.open(this.href, '_blank');
+});
+
 document.getElementById('btn-proximo').addEventListener('click', function(event) {
     const selectedValue = document.querySelector('input[name="opcao"]:checked').value;
     localStorage.setItem('selectedOption', selectedValue);
@@ -15,23 +20,6 @@ document.getElementById('btn-proximo').addEventListener('click', function(event)
 });
 
 function logCheckboxClick(checkbox) {
-    const checkboxValue = checkbox;
-    const check1 = document.getElementById('check');
-    const check2 = document.getElementById('check2');
-
-    if (checkboxValue === 'pfx-crtkey') {
-        if (!check2.disabled) {
-            check2.disabled = true; 
-        } else {
-            check2.disabled = false; 
-        }
-    } else if (checkboxValue === 'crtkey-pfx') {
-        if (!check1.disabled) {
-            check1.disabled = true; 
-        } else {
-            check1.disabled = false; 
-        }
-    }
     validate();
 }
 
@@ -48,4 +36,6 @@ function validate() {
         btnNext.classList.remove('enabled');
         btnNext.disabled = true;
     }
+
 }
+

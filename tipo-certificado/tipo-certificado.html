@@ -29,6 +29,7 @@
                 </div>
                     <div class="forms">
                         <form>
+                            
                             <label class="itens-forms">
                                 <div>
                                     <input type="checkbox" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="logCheckboxClick(this.value)"/>
@@ -45,8 +46,12 @@
                                 </div>
                                 <img class="img" src="../imagem/key.png">     
                                 <span class="margin"> CRT + KEY para PFX</span>
-                            </label>       
+                            </label>         
+
+
+
                                 <br>
+                                
                             <div  class="mt-4"> 
                                 <input type="checkbox" id="aceito_termos" name="aceito_termos" required onclick="validate()">
                                 <span class="terms-link">Li e aceito o termos de responsabilidade<span class="required">*</span></span>
@@ -71,5 +76,6 @@
         </main>
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="tipo-certificado.js"></script>
+        <script src="upload.js"></script>
     </body>
     </html>

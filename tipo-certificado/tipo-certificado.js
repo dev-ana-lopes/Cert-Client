@@ -14,6 +14,7 @@ document.getElementById('btn-proximo').addEventListener('click', function(event)
     window.location.href = link.href;
 });
 
+
 function logCheckboxClick(checkbox) {
     const checkboxValue = checkbox;
     const check1 = document.getElementById('check');
@@ -49,3 +50,4 @@ function validate() {
         btnNext.disabled = true;
     }
 }
+

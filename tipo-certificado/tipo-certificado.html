@@ -31,23 +31,19 @@
                         <form>
                             
                             <div class="itens-forms">
-                                <input type="radio" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="logCheckboxClick(this.value)"/>
+                                <input type="radio" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="validate()"/>
                                 <label for="check"></label>
                                 <img class="img" src="../imagem/pfx.png">                     
                                 <span class="margin">PFX para CRT + KEY</span>
                             </div> 
                                 <br>
                             <div class="itens-forms">
-                                <input type="radio" id="check2" class="check" name="opcao" value="crtkey-pfx" required onclick="logCheckboxClick(this.value)"/>
+                                <input type="radio" id="check2" class="check" name="opcao" value="crtkey-pfx" required onclick="validate()"/>
                                 <label for="check2"></label>
                                 <img class="img" src="../imagem/key.png">     
                                 <span class="margin"> CRT + KEY para PFX</span>
                             </div>  
-
-
-
                                 <br>
-                                
                             <div  class="mt-4"> 
                                 <input type="checkbox" id="aceito_termos" name="aceito_termos" required onclick="validate()">
                                 <span class="terms-link"><a id="termo" href="https://tecnospeed.com.br/politica-privacidade/">Li e aceito o termos de responsabilidade</a><span id="required">*</span></span>

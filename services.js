@@ -38,8 +38,6 @@ function isCrt(crtInput) {
   return crtInput.endsWith(".crt");
 }
 
-// --------------------------------------------------------------------------- 
-// adicionar o await na validação senha. <3
 function readFile(filePath) {
   return fs.readFileSync(filePath);
 }

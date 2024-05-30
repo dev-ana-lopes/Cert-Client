@@ -19,11 +19,6 @@ document.getElementById('btn-proximo').addEventListener('click', function(event)
     window.location.href = link.href;
 });
 
-
-function logCheckboxClick(checkbox) {
-    validate();
-}
-
 function validate() {
     const acceptedTerms = document.getElementById('aceito_termos');
     const check1 = document.getElementById('check');

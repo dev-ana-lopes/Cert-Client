@@ -92,9 +92,20 @@ body{
   font-family: 'Alice';
 }
 
+
 .terms-link {
   font-family: 'Alice';
   font-size: medium;
+  
+  #required {
+    color: red;
+    margin-left: 7px;
+  }
+
+  a {
+    color: white;
+  }
+
 }
 
 .custom-mt {
@@ -128,11 +139,6 @@ body{
 .next-btn a {
   color: var(--text-color);
   text-decoration: none;
-}
-
-.required {
-  color: red;
-  margin-left: 7px;
 }
 
 .check {
@@ -180,30 +186,10 @@ body{
   }
 } 
 
-.check2 {
-  visibility: hidden;
-  width: 0.1px;
-  height: 0.1px;
-}
-
-.check2 + label {
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--text-color);
-  border-radius: 50%;
-  box-sizing: border-box;
-  transition: all 0.7s ease;
-}
-
-.check2:checked + label {
-  border-width: 5px;
-  background: linear-gradient(90deg, var(--cor-primaria),var(--cor-terciaria));
-  animation: jelly 0.5s ease-in-out;
-}
-
 .itens-forms {
   display: flex;
   align-items: center; 
+  gap: 6px;
 }
 
 .itens-forms input[type="checkbox"] {

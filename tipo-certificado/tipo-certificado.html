@@ -30,23 +30,19 @@
                     <div class="forms">
                         <form>
                             
-                            <label class="itens-forms">
-                                <div>
-                                    <input type="checkbox" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="logCheckboxClick(this.value)"/>
-                                    <label for="check"></label>
-                                </div> 
+                            <div class="itens-forms">
+                                <input type="radio" id="check" class="check" name="opcao" value="pfx-crtkey" required onclick="logCheckboxClick(this.value)"/>
+                                <label for="check"></label>
                                 <img class="img" src="../imagem/pfx.png">                     
                                 <span class="margin">PFX para CRT + KEY</span>
-                            </label>
+                            </div> 
                                 <br>
-                            <label class="itens-forms">
-                                <div>
-                                    <input type="checkbox" id="check2" class="check2" name="opcao" value="crtkey-pfx" required onclick="logCheckboxClick(this.value)"/>
-                                    <label for="check2"></label>
-                                </div>
+                            <div class="itens-forms">
+                                <input type="radio" id="check2" class="check" name="opcao" value="crtkey-pfx" required onclick="logCheckboxClick(this.value)"/>
+                                <label for="check2"></label>
                                 <img class="img" src="../imagem/key.png">     
                                 <span class="margin"> CRT + KEY para PFX</span>
-                            </label>         
+                            </div>  
 
 
 
@@ -54,27 +50,22 @@
                                 
                             <div  class="mt-4"> 
                                 <input type="checkbox" id="aceito_termos" name="aceito_termos" required onclick="validate()">
-                                <span class="terms-link">Li e aceito o termos de responsabilidade<span class="required">*</span></span>
+                                <span class="terms-link"><a id="termo" href="https://tecnospeed.com.br/politica-privacidade/">Li e aceito o termos de responsabilidade</a><span id="required">*</span></span>
                             </div>   
                                 <br>
                             <button id="btn-proximo" class="next-btn" type="button" disabled>Próximo<a href="../upload/upload.html"></a></button>
-
-
-
-
                         </form>
                         <div class="nuvens">
-                            <div class="nuvem-d">
+                            <div class="nuvem-d selector">
                                 <img src="../imagem/Nuvem-Direita_1.png" class="nuvem-di">
                             </div>
-                            <div class="nuvem-e">
+                            <div class="nuvem-e selector">
                                 <img src="../imagem/Nuvem-esquerda_1.png" class="nuvem-es">
                             </div>
                         </div>
                     </div>
             </div>
         </main>
-        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="tipo-certificado.js"></script>
         <script src="upload.js"></script>
     </body>

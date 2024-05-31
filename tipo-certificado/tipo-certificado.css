@@ -118,8 +118,7 @@ body{
   font-size: 25px;
   border: var(--text-color) solid 3px;
   border-radius: 30px;
-  background-color:var(--cor-primaria);
-  font-weight: bold;      
+  background-color:var(--cor-primaria);      
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
 }
 

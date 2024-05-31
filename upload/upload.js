@@ -16,7 +16,7 @@ const span2 = document.getElementById('span2');
 const fonte = document.getElementById('fonte');
 
 const selectedOption = localStorage.getItem('selectedOption');
-const uploadButton = document.getElementById('upload-button');
+const dropAreaText = document.getElementById('drop-area-text');
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnOut = document.getElementById('docs');
@@ -80,7 +80,7 @@ function hiddenItens(validFiles, selectedOption) {
         img1.style.display = 'block';
         img2.style.display = 'none';
         fonte.style.display = 'none';
-        uploadButton.style.display = 'none';
+        dropAreaText.style.display = 'none';
 
         span1.innerText = validFiles[0].name;
 
@@ -178,3 +178,17 @@ function isValidFile(file, selectedOption, validFiles, fileExtension) {
     return true;
 }
 
+function typeConvert() {
+    if (selectedOption === 'pfx-crtkey') {
+        return 'Conversão do PFX para CRT + KEY';
+    }
+    return 'Conversão do CRT + KEY para PFX';
+}
+
+function insertText() {
+    document.getElementById("output").innerHTML = typeConvert();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+            insertText();
+        });

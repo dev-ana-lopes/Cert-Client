@@ -17,21 +17,13 @@ const selectedOption = localStorage.getItem('selectedOption');
 
 const dropArea = document.getElementById('docsArea');
 
+document.getElementById('docsArea').addEventListener('click', openInputFiles);
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('docs').addEventListener('click', function (event) {
         event.preventDefault();
         window.open('https://github.com/dev-ana-lopes/Cert-Client', '_blank');
     });
-
-    const selectedOption = localStorage.getItem('selectedOption');
-    console.log('Opção selecionada:', selectedOption);
-
-    insertText();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const selectedOption = localStorage.getItem('selectedOption');
-    console.log(selectedOption);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -46,34 +38,31 @@ document.getElementById('pfxInput').addEventListener('change', function (event) 
 
 document.getElementById('crtInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
-    const extension = getExtension(file.name);
+    const extension = getExtension(file);
     if (extension === '.crt') {
         crtForButton = file;
-    }
-
-    console.log('Arquivo CRT:', crtForButton);
-    updateFileInput([crtForButton]);
-    
-});
-
-document.getElementById('keyInput').addEventListener('change', function (event) {
-    const file = event.target.files[0];
-    const extension = getExtension(file.name);
-
-    if (extension === '.key') {
+    }  else if (extension === '.key') {
         keyForButton = file;
     }
 
-    console.log('Arquivo KEY:', keyForButton);
-
-    updateFileInput([keyForButton]);
-
+    console.log('Arquivo CRT:', crtForButton);
+    updateFileInput([crtForButton, keyForButton]);
 });
 
+// document.getElementById('keyInput').addEventListener('change', function (event) {
+//     const file = event.target.files[0];
+//     const extension = getExtension(file.name);
+
+//     if (extension === '.key') {
+//         keyForButton = file;
+//     }
+
+//     console.log('Arquivo KEY:', keyForButton);
+
+//     updateFileInput([keyForButton]);
+
+// });
  
-
-
-
 dropArea.addEventListener('dragover', (event) => {
     event.preventDefault();
     dropArea.classList.add('dragover');
@@ -91,7 +80,6 @@ dropArea.addEventListener('drop', (event) => {
 
     const files = event.dataTransfer.files;
     console.log('Arquivos soltos:', files);
-    handleFiles(files);
 
     if (files.length === 0) {
         console.error('Nenhum arquivo solto. Verifique as permissões e tente novamente.');
@@ -116,18 +104,20 @@ function getPassword() {
     return document.getElementById('password').value;
 }
 
-function getExtension(fileName) {
-    return fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+function getExtension(file) {
+    return file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
 }
 
 function openInputFiles() {
+    document.getElementById('pfxInput').value = '';
+    document.getElementById('crtInput').value = '';
+
     if (selectedOption === 'pfx-crtkey') {
         console.log('Opção selecionada: PFX para CRT + KEY');
-        pfxForButton = document.getElementById('pfxInput').click();
+        document.getElementById('pfxInput').click();
     } else if (selectedOption === 'crtkey-pfx') {
         console.log('Opção selecionada: CRT + KEY para PFX');
         document.getElementById('crtInput').click();
-        document.getElementById('keyInput').click();
     }
 }
 
@@ -146,7 +136,7 @@ function updateFileInput(files) {
 function handleFiles(files) {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const fileExtension = getExtension(file.name);
+        const fileExtension = getExtension(file);
 
         console.log(`Processando arquivo: ${file.name} com extensão ${fileExtension}`);
 
@@ -160,7 +150,9 @@ function handleFiles(files) {
     }
 
     console.log("Arquivos válidos em handleFiles:", validFiles);
-    hiddenDropArea(validFiles, selectedOption);
+    if (validFiles.length !== 0) {
+        hiddenDropArea(validFiles, selectedOption);
+    } 
 }
 
 function isValidFile(file, selectedOption, validFiles, fileExtension) {
@@ -245,12 +237,13 @@ function chooseFileSendMain() {
 
     if (selectedOption === 'pfx-crtkey') {
         sendPfxToMain(password);
-
     } else {
         sendCrtKeyToMain(password);
     }
-
     validFiles = [];
+    pfxForButton = undefined;
+    crtForButton = undefined;
+    keyForButton = undefined;
     notEmptyArea();
     clearPassword();
 }

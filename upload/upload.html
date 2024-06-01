@@ -34,7 +34,7 @@
             <div id="docsArea" class="docs-area">
                 <!-- PFX - Area de arquivo -->
                 <div id="drop-area-pfx" class="drop-area">
-                    <div id="drop-area-text" class="drop-area-text icon-upload" onclick="openInputFiles()">
+                    <div id="drop-area-text" class="drop-area-text icon-upload">
                         <div id="imgUpload" class="icon-upload selector">
                             <img class="img selector" src="../imagem/upload.png" alt="ícone de upload">
                         </div>
@@ -47,6 +47,10 @@
                         <div>
                             <img id="img1" class="sizeFile selector" src="../imagem/file.png">
                             <span id="span1"></span>
+                        </div>
+                        <div>
+                            <img id="img2" class="sizeFile selector" src="../imagem/file.png">
+                            <span id="span2"></span>
                         </div>
                     </div>
                 </div>
@@ -74,8 +78,8 @@
         </div>
     </main>
     <input type="file" id="pfxInput" accept=".pfx" style="display:none;">
-    <input type="file" id="crtInput" accept=".crt" style="display:none;" multiple>
-    <input type="file" id="keyInput" accept=".key" style="display:none;" multiple>
+    <input type="file" id="crtInput" accept=".crt,.key" style="display:none;">
+    <!-- <input type="file" id="keyInput" accept=".key" style="display:none;"> -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="upload.js"></script>

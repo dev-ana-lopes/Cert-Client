@@ -47,6 +47,14 @@ document.getElementById('crtInput').addEventListener('change', function(event) {
     updateFileInput([crtForButton, keyForButton]);
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    insertText();
+});
+
+function insertText() {
+    document.getElementById("output").innerHTML = typeConvert();
+}
+
 function updateFileImages(files) {
     let validFiles;
 
@@ -67,7 +75,7 @@ function hiddenItens(validFiles, selectedOption) {
         img1.style.display = 'block';
         img2.style.display = 'none';
         fonte.style.display = 'none';
-        uploadButton.style.display = 'none';
+        dropAreaText.style.display = 'none';
 
         span1.innerText = validFiles[0].name;
 
@@ -88,11 +96,6 @@ function hiddenItens(validFiles, selectedOption) {
         span2.innerText = validFiles[1].name;
     }
 }
-
-
-/*-------------------------------------*/
-
-const dropArea = document.getElementById('dropArea');
 
 dropArea.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -173,20 +176,20 @@ function hiddenAllItens() {
     span2.innerText = validFiles[1].name;
 }
 
-function showItensDropArea() {
-    img1.style.display = 'none';
-    img2.style.display = 'none';
-    fonte.style.display = 'block';
-    span1.innerText = '';
-    span2.innerText = '';
-}
+// function showItensDropArea() {
+//     img1.style.display = 'none';
+//     img2.style.display = 'none';
+//     fonte.style.display = 'block';
+//     span1.innerText = '';
+//     span2.innerText = '';
+// }
 
-function deleteItensDropArea(){
-    if ( selectedOption === 'pfx-crtkey') {
-        validFiles = [];
-        showItensDropArea();
-    }
-}
+// function deleteItensDropArea(){
+//     if ( selectedOption === 'pfx-crtkey') {
+//         validFiles = [];
+//         showItensDropArea();
+//     }
+// }
 
 function handleFiles(files) {
 
@@ -301,10 +304,4 @@ function typeConvert() {
     return 'Conversão do CRT + KEY para PFX';
 }
 
-function insertText() {
-    document.getElementById("output").innerHTML = typeConvert();
-}
 
-document.addEventListener("DOMContentLoaded", function() {
-            insertText();
-        });

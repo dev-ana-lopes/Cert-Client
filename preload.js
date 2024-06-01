@@ -6,8 +6,7 @@ const ipc = {
         'send': [
             'verifyPfxToCrt', 
             'verifyCrtToPfx',
-            'verifyInputs',
-            'files-data'
+            'verifyInputs'
         ],
         'receive': [],
         'sendReceive': []

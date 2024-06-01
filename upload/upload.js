@@ -29,29 +29,36 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(selectedOption);
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    insertText();
+});
+
 document.getElementById('pfxInput').addEventListener('change', function (event) {
     pfxForButton = event.target.files;
-    console.log(pfxForButton);
+    console.log("PfxList",pfxForButton);
     updateFileInput(pfxForButton);
 });
 
 document.getElementById('crtInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
-    const extension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    const extension = getExtension(file.name);
+
     if (extension === '.crt') {
         crtForButton = file;
     } else if (extension === '.key') {
         keyForButton = file;
     }
+
     console.log('Arquivo CRT:', crtForButton);
     console.log('Arquivo KEY:', keyForButton);
     updateFileInput([crtForButton, keyForButton]);
 });
-
+ 
 
 document.addEventListener("DOMContentLoaded", function () {
     insertText();
 });
+
 
 dropArea.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -86,45 +93,8 @@ function getPassword() {
     return document.getElementById('password').value;
 }
 
-function updateFileImages(files) {
-
-    if (selectedOption === 'pfx-crtkey') {
-        validFiles = files;
-    } else {
-        validFiles = files.filter(file => file !== undefined);
-    }
-
-    console.log("Arquvios:", validFiles);
-
-    hiddenItens(validFiles, selectedOption);
-}
-
-function hiddenItens(validFiles, selectedOption) {
-    if (validFiles.length === 1 && selectedOption === 'pfx-crtkey') {
-        img1.style.display = 'block';
-        img2.style.display = 'none';
-        fonte.style.display = 'none';
-        dropArea.style.display = 'none';
-
-        span1.innerText = validFiles[0].name;
-
-    } else if (validFiles.length === 1 && selectedOption === 'crtkey-pfx') {
-        img1.style.display = 'block';
-        img2.style.display = 'none';
-        fonte.style.display = 'none';
-        dropArea.style.display = 'none';
-
-        span1.innerText = validFiles[0].name;
-
-    } else if (validFiles.length === 2 && selectedOption === 'crtkey-pfx') {
-        img1.style.display = 'block';
-        img2.style.display = 'block';
-        fonte.style.display = 'none';
-        dropArea.style.display = 'none';
-
-        span1.innerText = validFiles[0].name;
-        span2.innerText = validFiles[1].name;
-    }
+function getExtension(fileName) {
+    return fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
 }
 
 function openInputFiles() {
@@ -134,13 +104,6 @@ function openInputFiles() {
     } else if (selectedOption === 'crtkey-pfx') {
         console.log('Opção selecionada: CRT + KEY para PFX');
         document.getElementById('crtInput').click();
-    }
-}
-function emptyArea() {
-    if (validFiles.length > 0) {
-        imgUpload.style.display = 'none';
-        fonte.style.display = 'none';
-        fonte2.style.display = 'none';
     }
 }
 
@@ -156,70 +119,10 @@ function updateFileInput(files) {
     hiddenDropArea(validFiles, selectedOption);
 }
 
-function hiddenDropArea(validFiles, selectedOption) {
-    if (validFiles.length === 1 && selectedOption === 'pfx-crtkey') {
-        hiddenOneIten();
-
-    } else if (validFiles.length === 1 && selectedOption === 'crtkey-pfx') {
-        hiddenC();
-
-    } else if (validFiles.length === 2 && selectedOption === 'crtkey-pfx') {
-        hiddenAllItens();
-    }
-}
-
-function hiddenOneIten() {
-    img1.style.display = 'block';
-    img2.style.display = 'none';
-    fonte.style.display = 'none';
-
-    span1.innerText = validFiles[0].name;
-}
-
-function hiddenC() {
-    img1.style.display = 'block';
-    img2.style.display = 'none';
-    fonte.style.display = 'none';
-
-    span1.innerText = validFiles[0].name;
-}
-
-function hiddenAllItens() {
-    img1.style.display = 'block';
-    img2.style.display = 'block';
-    fonte.style.display = 'none';
-
-    span1.innerText = validFiles[0].name;
-    span2.innerText = validFiles[1].name;
-}
-
-function showItensDropArea() {
-    img1.style.display = 'none';
-    img2.style.display = 'none';
-    fonte.style.display = 'block';
-    fonte2.style.display = 'block';
-    span1.innerText = '';
-    span2.innerText = '';
-}
-
-function deleteItensDropArea() {
-    if (selectedOption === 'pfx-crtkey') {
-        validFiles = [];
-        showItensDropArea();
-    }
-}
-
-function deleteItensDropAreaForId() {
-    if (selectedOption === 'crtkey-pfx') {
-
-    }
-}
-
 function handleFiles(files) {
-
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+        const fileExtension = getExtension(file.name);
 
         if (!isValidFile(file, selectedOption, validFiles, fileExtension)) {
             continue;
@@ -269,53 +172,91 @@ function isValidFile(file, selectedOption, validFiles, fileExtension) {
     return true;
 }
 
-function sendToMain() {
+function hiddenDropArea(validFiles, selectedOption) {
+    emptyArea();
+
+    if (validFiles.length === 1) {
+        showSingleFile();
+        
+    } else if (validFiles.length === 2 && selectedOption === 'crtkey-pfx') {
+        showPairFile();
+    }
+}
+
+function showSingleFile() {
+    img1.style.display = 'block';
+    span1.innerText = validFiles[0].name;
+}
+
+function showPairFile() {
+    img1.style.display = 'block';
+    img2.style.display = 'block';
+    span1.innerText = validFiles[0].name;
+    span2.innerText = validFiles[1].name;
+}
+
+function emptyArea() {
+    imgUpload.style.display = 'none';
+    fonte.style.display = 'none';
+    fonte2.style.display = 'none';
+}
+
+function notEmptyArea() {
+    img1.style.display = 'none';
+    img2.style.display = 'none';
+    imgUpload.style.display = 'block';
+    fonte.style.display = 'block';
+    fonte2.style.display = 'block';
+    span1.innerText = '';
+    span2.innerText = '';
+}
+
+function clearPassword() {
+    document.getElementById('password').value = '';
+}
+
+function chooseFileSendMain() { 
     const password = getPassword();
 
     if (selectedOption === 'pfx-crtkey') {
-        const pfxFilePath = validFiles[0].path;
-        const pfxFileName = validFiles[0].name;
+        sendPfxToMain(password);
 
-        console.log(pfxFilePath);
-        console.log(pfxFileName);
-        console.log(password);
-
-        window.ipcRender.send('verifyPfxToCrt', {
-            pfxFilePath,
-            pfxFileName,
-            password
-        });
-
-        validFiles = [];
-        showItensDropArea();
-    }
-
-    else {
-        const crtFile = validFiles.find(file => file.name.endsWith('.crt'));
-        const crtKeyFile = validFiles.find(file => file.name.endsWith('.key'));
-
-        const crtFilePath = crtFile.path;
-        const crtFileName = crtFile.name;
-        const crtKeyFilePath = crtKeyFile.path;
-        const crtKeyFileName = crtKeyFile.name;
-
-        console.log(crtFilePath);
-        console.log(crtFileName);
-        console.log(crtKeyFilePath);
-        console.log(crtKeyFileName);
-        console.log(password);
-
-        window.ipcRender.send('verifyCrtToPfx', {
-            crtFilePath,
-            crtFileName,
-            crtKeyFilePath,
-            crtKeyFileName,
-            password
-        });
+    } else {
+        sendCrtKeyToMain(password);
     }
 
     validFiles = [];
-    showItensDropArea();
+    notEmptyArea();
+    clearPassword();
+}
+
+function sendPfxToMain(password) {
+    const pfxFilePath = validFiles[0].path;
+    const pfxFileName = validFiles[0].name;
+
+    window.ipcRender.send('verifyPfxToCrt', {
+        pfxFilePath,
+        pfxFileName,
+        password
+    });
+}
+
+function sendCrtKeyToMain(password) {
+    const crtFile = validFiles.find(file => file.name.endsWith('.crt'));
+    const crtKeyFile = validFiles.find(file => file.name.endsWith('.key'));
+
+    const crtFilePath = crtFile.path;
+    const crtFileName = crtFile.name;
+    const crtKeyFilePath = crtKeyFile.path;
+    const crtKeyFileName = crtKeyFile.name;
+
+    window.ipcRender.send('verifyCrtToPfx', {
+        crtFilePath,
+        crtFileName,
+        crtKeyFilePath,
+        crtKeyFileName,
+        password
+    });
 }
 
 

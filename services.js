@@ -44,13 +44,14 @@ function readFile(filePath) {
 
 function parsePfxData(pfxData, password) {
   console.log('\nConvertendo certificado para formato compreensivel...');
+  console.log("\nPfxData:", pfxData,"\nSenha:",password);
   let pfxAsn1;
   try {
     pfxAsn1 = forge.asn1.fromDer(pfxData.toString('binary'));
   } catch (ex) {
     eventEmitter.emit('falseConvert');
   }
-
+  console.log("\nConverteu para binary:",pfxAsn1);
   try {
     return forge.pkcs12.pkcs12FromAsn1(pfxAsn1, password);
   } catch(ex) {

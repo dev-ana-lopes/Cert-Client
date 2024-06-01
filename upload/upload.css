@@ -1,11 +1,27 @@
 @import "../global/style.css";
 
 body{
-  font-family: 'Alice';
+  font-family: var(--font);
   width: auto;
   height: 650px;
   position: relative;
+  background-image: var(--bg-gradiente-light);
+  z-index: 1;
+  margin-bottom: 25px;
+
+  .nav-style {
+    font-family: 'Alice';
+    color:white ;
+    background-color:#6F42C1; 
+    padding: 8px 8px;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
+    
 }
+
 
 .container-fluid {
   padding: 20px;
@@ -13,6 +29,12 @@ body{
   flex-direction: column;
   align-items: center;
   z-index: 1;
+
+  /* Titulo da conversão */
+  #output {
+    color: white;
+    text-align: center;
+  }
   }
 
   .docs-area {
@@ -27,6 +49,12 @@ body{
     background-color: var(--cor-terciaria);
     border-radius: 5px;
     margin: 38px 16%;
+
+    .drop-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .icon-upload {
       display: flex;
@@ -44,48 +72,22 @@ body{
       }
     }
 
-    /* .upload-button{
-      width: 30%;
-      height: 50px;
-      font-size: 17px;
-      background-color: var(--cor-primaria);
-      color: var(--text-color);
-      border-radius: 30px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    } */
-
-    h4 {
-      text-align: center;
-      color: #3b196d;
-    }
-
+    /* Icones dos documentos */
     .icon-upload .sizeFile {
       width: 60px;
       margin-right: 10px;
       height: auto;
       display: none;
       margin-bottom: 10%;
-
+      flex-direction: row;
+      justify-content:baseline;
       
+      #img1, img2 {
+        display: block;
+      }
     }
 
   }
-
-
-.bg-gradiente {
-  background-image: linear-gradient(to left, #8162D4, #927AE7, #A398F9, #ffffff);
-  position: relative;
-  z-index: 1;
-  margin-bottom: 25px;
-}
-
-.nav-style {
-  font-family: 'Alice';
-  color:white ;
-  background-color:#6F42C1; 
-  padding: 8px 8px;
-  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.5);
-}
 
 .tx-color-white {
   color: white; 
@@ -257,3 +259,4 @@ body{
 .custom-button:active {
   transform: scale(0.95);
 }
+

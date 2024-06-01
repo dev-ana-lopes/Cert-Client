@@ -15,13 +15,18 @@ const fonte2 = document.getElementById('fonte2');
 
 const selectedOption = localStorage.getItem('selectedOption');
 
-const dropArea = document.getElementById('dropArea');
+const dropArea = document.getElementById('docsArea');
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('docs').addEventListener('click', function (event) {
         event.preventDefault();
         window.open('https://github.com/dev-ana-lopes/Cert-Client', '_blank');
     });
+
+    const selectedOption = localStorage.getItem('selectedOption');
+    console.log('Opção selecionada:', selectedOption);
+
+    insertText();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,38 +40,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById('pfxInput').addEventListener('change', function (event) {
     pfxForButton = event.target.files;
-    console.log("PfxList",pfxForButton);
+    console.log("PfxList", pfxForButton);
     updateFileInput(pfxForButton);
 });
 
 document.getElementById('crtInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     const extension = getExtension(file.name);
-
     if (extension === '.crt') {
         crtForButton = file;
-    } else if (extension === '.key') {
-        keyForButton = file;
     }
 
     console.log('Arquivo CRT:', crtForButton);
-    console.log('Arquivo KEY:', keyForButton);
-    updateFileInput([crtForButton, keyForButton]);
+    updateFileInput([crtForButton]);
+    
 });
+
+document.getElementById('keyInput').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const extension = getExtension(file.name);
+
+    if (extension === '.key') {
+        keyForButton = file;
+    }
+
+    console.log('Arquivo KEY:', keyForButton);
+
+    updateFileInput([keyForButton]);
+
+});
+
  
 
-document.addEventListener("DOMContentLoaded", function () {
-    insertText();
-});
 
 
 dropArea.addEventListener('dragover', (event) => {
     event.preventDefault();
     dropArea.classList.add('dragover');
+    console.log('Arquivo sendo arrastado sobre a área de drop');
 });
 
 dropArea.addEventListener('dragleave', () => {
     dropArea.classList.remove('dragover');
+    console.log('Arquivo deixou a área de drop');
 });
 
 dropArea.addEventListener('drop', (event) => {
@@ -74,7 +90,14 @@ dropArea.addEventListener('drop', (event) => {
     dropArea.classList.remove('dragover');
 
     const files = event.dataTransfer.files;
+    console.log('Arquivos soltos:', files);
     handleFiles(files);
+
+    if (files.length === 0) {
+        console.error('Nenhum arquivo solto. Verifique as permissões e tente novamente.');
+    } else {
+        handleFiles(files);
+    }
 });
 
 
@@ -104,6 +127,7 @@ function openInputFiles() {
     } else if (selectedOption === 'crtkey-pfx') {
         console.log('Opção selecionada: CRT + KEY para PFX');
         document.getElementById('crtInput').click();
+        document.getElementById('keyInput').click();
     }
 }
 
@@ -124,12 +148,15 @@ function handleFiles(files) {
         const file = files[i];
         const fileExtension = getExtension(file.name);
 
+        console.log(`Processando arquivo: ${file.name} com extensão ${fileExtension}`);
+
         if (!isValidFile(file, selectedOption, validFiles, fileExtension)) {
+            console.log(`Arquivo inválido: ${file.name}`);
             continue;
         }
 
         validFiles.push(file);
-        console.log(`Arquivo solto: ${file.name}`);
+        console.log(`Arquivo válido adicionado: ${file.name}`);
     }
 
     console.log("Arquivos válidos em handleFiles:", validFiles);
@@ -141,13 +168,13 @@ function isValidFile(file, selectedOption, validFiles, fileExtension) {
     const existingIndex = validFiles.findIndex(existingFile => existingFile.name.substring(existingFile.name.lastIndexOf('.')).toLowerCase() === fileExtension);
 
     if (!allowedExtensions.includes(fileExtension)) {
-        console.log(`Arquivo não permitido: ${file.name}`);
+        console.log(`Extensão de arquivo não permitida: ${file.name}`);
         return false;
     }
 
     if (selectedOption === 'pfx-crtkey' && existingIndex !== -1) {
         validFiles[existingIndex] = file;
-        console.log('Já existe um arquivo .pfx. Substituindo...', file);
+        console.log(`Já existe um arquivo .pfx. Substituindo...`, file);
         return false;
     }
 
@@ -156,15 +183,13 @@ function isValidFile(file, selectedOption, validFiles, fileExtension) {
         const keyIndex = validFiles.findIndex(existingFile => existingFile.name.toLowerCase().endsWith('.key'));
 
         if (fileExtension === '.crt' && crtIndex !== -1) {
-            console.log('Já existe um arquivo .crt. Substituindo...');
+            console.log(`Já existe um arquivo .crt. Substituindo...`);
             validFiles[crtIndex] = file;
-            console.log('Já existe um arquivo .crt. Substituindo...', file);
             return false;
         }
 
         if (fileExtension === '.key' && keyIndex !== -1) {
             validFiles[keyIndex] = file;
-            console.log('Já existe um arquivo .key. Substituindo...', file);
             return false;
         }
     }

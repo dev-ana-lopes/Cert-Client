@@ -11,9 +11,9 @@
     <title>CertClient</title>
 </head>
 
-<body class="bg-gradiente">
+<body class="tela-upload">
     <header>
-        <nav class="d-flex justify-content-between align-items-center nav-style">
+        <nav class="nav-style">
             <img class="size-logo" src="../imagem/tecnospeed-white 1.svg">
             <div class="menu-right">
                 <ul class="nav col-6 col-md-auto mb-2 justify-content-end mb-md-0">
@@ -28,29 +28,25 @@
     <main>
         <div class="container-fluid">
             <div class="border-bottom title">
-                <h2 id="output" class="text-align-center fs-4"></h2>
+                <!-- Titulo da conversão-->
+                <h2 id="output" class="fs-4"></h2>
             </div>
-            <div class="docs-area">
-                <div class="align-items-center justify-content-center">
-                    <div class="drop-area" id="dropArea">
-                        <div id="drop-area-text" class="drop-area-text icon-upload" onclick="openInputFiles()">
-                            <div id="imgUpload" class="icon-upload selector">
-                                <img class="img selector" src="../imagem/upload.png" alt="ícone de upload">
-                            </div>
-                            <div class="icon-upload">
-                                <h2 id="fonte" class="fonte">Clique aqui<br></h2>
-                                <h2 id="fonte2" class="fonte">Ou arraste e solte o arquivo na área delimitada</h2>
-                            </div>
+            <div id="docsArea" class="docs-area">
+                <!-- PFX - Area de arquivo -->
+                <div id="drop-area-pfx" class="drop-area">
+                    <div id="drop-area-text" class="drop-area-text icon-upload" onclick="openInputFiles()">
+                        <div id="imgUpload" class="icon-upload selector">
+                            <img class="img selector" src="../imagem/upload.png" alt="ícone de upload">
                         </div>
                         <div class="icon-upload">
-                            <div>
-                                <img id="img1" class="sizeFile selector" src="../imagem/file.png">
-                                <span id="span1"></span>
-                            </div>
-                            <div>
-                                <img id="img2" class="sizeFile selector" src="../imagem/file.png">
-                                <span id="span2"></span>
-                            </div>
+                            <h2 id="fonte" class="fonte">Clique aqui e adicione seu arquivo válido.<br></h2>
+                            <h2 id="fonte2" class="fonte">Ou arraste e solte o arquivo na área delimitada.</h2>
+                        </div>
+                    </div>
+                    <div class="icon-upload">
+                        <div>
+                            <img id="img1" class="sizeFile selector" src="../imagem/file.png">
+                            <span id="span1"></span>
                         </div>
                     </div>
                 </div>
@@ -77,11 +73,11 @@
             </div>
         </div>
     </main>
-    <input type="file" id="pfxInput" accept=".pfx" style="display:none">
-    <input type="file" id="crtInput" accept=".crt,.key" style="display:none">
+    <input type="file" id="pfxInput" accept=".pfx" style="display:none;">
+    <input type="file" id="crtInput" accept=".crt" style="display:none;" multiple>
+    <input type="file" id="keyInput" accept=".key" style="display:none;" multiple>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="upload.js"></script>
 </body>
 

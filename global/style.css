@@ -5,7 +5,8 @@
     --cor-terciaria: #a398f9;
     --text-color: white;
     --text-color-dark: #4B2C7B;
-    --font-family: 'Alice';
+    --font: 'Alice';
+    --bg-gradiente-light: linear-gradient(to left, #8162D4, #927AE7, #A398F9, #ffffff);
 }
 
 /* background tela inicial */
@@ -19,6 +20,8 @@
   background-image: linear-gradient(to left, #8162D4, #927AE7, #A398F9, #ffffff);
   color: var(--text-color);   
 }
+
+
 
 /* background sistema mode dark */
 .bg-gradiente-dark {

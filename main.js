@@ -10,7 +10,7 @@ let window;
 
 function createWindow() {
     try {
-        const window = new electronBrowserWindow({
+         window = new electronBrowserWindow({
             width: 1050,
             height: 700,
             show: false,
@@ -18,7 +18,7 @@ function createWindow() {
             maximizable: false,
             webPreferences: {
                 nodeIntegration: true,
-                contextIsolation: false,
+                contextIsolation: true,
                 preload: nodePath.join(__dirname, 'preload.js')
             }
         });
@@ -62,11 +62,11 @@ electronApp.on('activate', () => {
 
 electronIpcMain.on('verifyPfxToCrt', (event, files) => {
     try {
-        const { pfxFilePath, pfxFileName, pfxPassword } = files;
+        const { pfxFilePath, pfxFileName, password } = files;
        
-        console.log('\nLOG:', pfxFilePath,'\nLOG:', pfxFileName,'\nLOG:', pfxPassword);
+        console.log('\nLOG:', pfxFilePath,'\nLOG:', pfxFileName,'\nLOG:', password);
 
-        services.checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword);
+        services.checkToConvertPfxToCrt(pfxFilePath, pfxFileName, password);
     } catch (error) {
         console.error('Erro ao verificar PFX para CRT:', error);
     }
@@ -74,22 +74,14 @@ electronIpcMain.on('verifyPfxToCrt', (event, files) => {
 
 electronIpcMain.on('verifyCrtToPfx', (event, files) => {
     try {
-        const { crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword } = files;
+        const { crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password } = files;
         
-        console.log('\nLOG:', crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword);
+        console.log('\nLOG:', crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password);
 
-        services.checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword);
+        services.checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password);
     } catch (error) {
         console.error('Erro ao verificar CRT para PFX:', error);
     }
-});
-
-electronIpcMain.on('verifyInputs', () => {
-    dialog.showMessageBox({
-        title: 'Aviso !!',
-        message: 'Verifique se os arquivos estão adicionados corretamente',
-        buttons: ['OK']
-    });
 });
 
 services.eventEmitter.on('invalidFile', (data) => {
@@ -107,7 +99,7 @@ services.eventEmitter.on('invalidFile', (data) => {
 
 services.eventEmitter.on('invalidPassword', (data) => {
     let message;
-    if (data.pfxPassword) {
+    if (data.password) {
         message = `Este arquivo esperava uma senha, mas a senha digitada inválida para arquivo PFX:`;
     } else {
         message = 'Senha vazia !!';

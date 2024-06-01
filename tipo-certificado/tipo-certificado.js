@@ -1,9 +1,7 @@
-const { shell } = require('electron');
-
 document.addEventListener('DOMContentLoaded', () => {
-    const btnOut = document.getElementById('docs');
-    btnOut.addEventListener('click', () => {
-        shell.openExternal('https://github.com/dev-ana-lopes/Cert-Client');
+    document.getElementById('docs').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        window.open('https://github.com/dev-ana-lopes/Cert-Client', '_blank');
     });
 });
 

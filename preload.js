@@ -7,7 +7,7 @@ const ipc = {
             'verifyPfxToCrt', 
             'verifyCrtToPfx',
             'verifyInputs',
-            'openExternalLink'
+            'files-data'
         ],
         'receive': [],
         'sendReceive': []

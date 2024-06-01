@@ -4,18 +4,18 @@ const EventEmitter = require('events');
 const eventEmitter = new EventEmitter();
 const forge = require('node-forge');
 
-function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, pfxPassword) {
+function checkToConvertPfxToCrt(pfxFilePath, pfxFileName, password) {
   if (isPfx(pfxFileName)) {
-    convertPfx(pfxFilePath, pfxFileName, pfxPassword);
+    convertPfx(pfxFilePath, pfxFileName, password);
   } else {
     eventEmitter.emit('invalidFile', { pfxFileName });
   }
 }
 
-function checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
+function checkToConvertCrtToPfx(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password) {
   if (isCrt(crtFileName) && isKey(crtKeyFileName)) {
     try {
-      convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName,crtPassword);
+      convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password);
     } catch (Ex) {
       if(Ex.message === "Os arrays sao diferentes.") {
         eventEmitter.emit('filesDoNotMatch');
@@ -42,7 +42,7 @@ function readFile(filePath) {
   return fs.readFileSync(filePath);
 }
 
-function parsePfxData(pfxData, pfxPassword) {
+function parsePfxData(pfxData, password) {
   console.log('\nConvertendo certificado para formato compreensivel...');
   let pfxAsn1;
   try {
@@ -52,10 +52,10 @@ function parsePfxData(pfxData, pfxPassword) {
   }
 
   try {
-    return forge.pkcs12.pkcs12FromAsn1(pfxAsn1, pfxPassword);
+    return forge.pkcs12.pkcs12FromAsn1(pfxAsn1, password);
   } catch(ex) {
     if (ex.message.includes('PKCS#12 MAC could not be verified')) {
-      return eventEmitter.emit('invalidPassword', {pfxPassword});
+      return eventEmitter.emit('invalidPassword', {password});
     } 
   }
 }
@@ -98,14 +98,14 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
   console.log('\nChave privada salva em:', chavePrivadaFilePath);
 }
 
-function convertPfx(pfxFilePath, pfxFileName, pfxPassword) {
+function convertPfx(pfxFilePath, pfxFileName, password) {
   console.log('\nIniciando conversao de PFX para CRT e KEY...');
   const folderPath = createFolder();
 
   console.log('\nLendo arquivo PFX...');
   const pfxData = readFile(pfxFilePath);
 
-  const pfx = parsePfxData(pfxData, pfxPassword);
+  const pfx = parsePfxData(pfxData, password);
 
   if (pfx === null || pfx === undefined || pfx === true) {
     return;
@@ -131,12 +131,12 @@ function convertToPemObjects(crtData, keyData) {
   return { certificate, privateKey };
 }
 
-function createPfxDer(privateKey, certificate, crtPassword) {
+function createPfxDer(privateKey, certificate, password) {
   console.log('\nCriando arquivo PFX...');
   const p12Asn1 = forge.pkcs12.toPkcs12Asn1(
     privateKey,
     certificate,
-    crtPassword
+    password
   );
 
   return forge.asn1.toDer(p12Asn1).getBytes();
@@ -157,7 +157,7 @@ function savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName) {
   console.log('\nPFX salvo em:', pfxFilePath);
 }
 
-function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, crtPassword) {
+function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password) {
   console.log('\nIniciando conversao de CRT para PFX...');
   
   const folderPath = createFolder();
@@ -169,7 +169,7 @@ function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, cr
   const keyData = readFile(crtKeyFilePath);
 
   const { certificate, privateKey } =  convertToPemObjects(crtData, keyData);
-  const p12Der = createPfxDer(privateKey, certificate, crtPassword);
+  const p12Der = createPfxDer(privateKey, certificate, password);
   
   savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName);
 }

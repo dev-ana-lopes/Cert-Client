@@ -113,7 +113,6 @@ services.eventEmitter.on('invalidPassword', (data) => {
 });
 
 services.eventEmitter.on('duplicate', (data) => {
-    console.log("\nDATA:0",data);
     const message = data.crtFileName && data.crtKeyFileName ?
     `Você já fez uma conversão usando o arquivo ${data.crtFileName} e ${data.crtKeyFileName} para gerar um arquivo PFX !!!` :
     `Você já fez uma conversão usando o arquivo ${data.pfxFileName} para gerar um arquivo CRT e KEY !!!`;
@@ -126,8 +125,6 @@ services.eventEmitter.on('duplicate', (data) => {
 });
 
 services.eventEmitter.on('falseConvert', () => {
-    console.log("\nFalseConvert:");
-
     dialog.showMessageBox(null, {
         title: 'Aviso',
         message: 'Erro arquivo do tipo invalido',
@@ -139,6 +136,18 @@ services.eventEmitter.on('filesDoNotMatch', () => {
     dialog.showMessageBox(null, {
         title: 'Aviso',
         message: 'Os arquvios .CRT e .KEY nao correspondentes entre si, verifique a origem de cada!',
+        buttons: ['OK'],
+    });
+});
+
+services.eventEmitter.on('Sucess', (data) => {
+    const message =  data.certificadoFilePath ?
+    `Conversão realizada com sucesso!!! O arquvio foi salvo em: ${data.certificadoFilePath}` :
+    `Conversão realizada com sucesso!!! O arquvio foi salvo em: ${data.pfxFilePath}`;
+
+    dialog.showMessageBox(null, {
+        title: 'SUCESSO',
+        message: message,
         buttons: ['OK'],
     });
 });

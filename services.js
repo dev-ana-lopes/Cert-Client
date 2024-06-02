@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const EventEmitter = require('events');
 const eventEmitter = new EventEmitter();
 const forge = require('node-forge');
@@ -97,6 +98,7 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
 
   console.log('\nCertificado salvo em:', certificadoFilePath);
   console.log('\nChave privada salva em:', chavePrivadaFilePath);
+  eventEmitter.emit('Sucess',{certificadoFilePath});
 }
 
 function convertPfx(pfxFilePath, pfxFileName, password) {
@@ -156,6 +158,7 @@ function savePfxFile(p12Der, folderPath, crtFileName, crtKeyFileName) {
   fs.writeFileSync(pfxFilePath, p12Der, 'binary');
 
   console.log('\nPFX salvo em:', pfxFilePath);
+  eventEmitter.emit('Sucess', {pfxFilePath});
 }
 
 function convertCrt(crtFilePath, crtFileName, crtKeyFilePath, crtKeyFileName, password) {
@@ -203,7 +206,28 @@ function isSomeLength(arrayCert, arrayKey) {
   }
 }
 
+function getOperatingSystem() {
+  const platform = os.platform();
+
+  switch(platform) {
+    case 'win32':
+      return 'Windows';
+    case 'linux':
+      return 'Linux';
+  }
+}
+
 function createFolder() {
+  let system = getOperatingSystem();
+
+  if (system === 'Windows') {
+    return createFolderWin();
+  } else if (system === 'Linux') {
+    return createFolderLinux();
+  }
+}
+
+function createFolderWin() {
   const folderName = "Certificados";
   const pathDesktop = path.join(require('os').homedir(), 'Desktop');
   const newPathFolder = path.join(pathDesktop, folderName);
@@ -228,6 +252,33 @@ function createFolder() {
     }
   }
   return newPathFolder;
+}
+
+
+function createFolderLinux() {
+  const folderName = "Certificados";
+  const userHome =  process.env.HOME || process.env.USERPROFILE;
+  const pathDocuments = path.join(userHome, 'Documents');
+  const newPathFolder = path.join(pathDocuments, folderName);
+ 
+  try {
+    if (!fs.existsSync(newPathFolder)) {
+      fs.mkdirSync(newPathFolder);
+      return newPathFolder;
+    }
+  } catch (err) {
+    console.error('Erro ao criar a pasta:', err);
+    try {
+        const pathDownloads = path.join(userHome, 'Downloads');
+        const newPathFolderDownloads = path.join(pathDownloads, folderName);
+        if (!fs.existsSync(newPathFolderDownloads)) {
+            fs.mkdirSync(newPathFolderDownloads);
+            return newPathFolderDownloads;
+        }
+    } catch (err) {
+        console.error('Erro ao criar a pasta na pasta de downloads:', err);
+      } 
+  }
 }
 
 module.exports = {

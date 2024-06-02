@@ -245,6 +245,16 @@ body{
   justify-content: center;
 }
 
+#convert:disabled {
+  background-color: transparent;
+  color: rgba(247, 244, 244, 0.792);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#close1 {
+  display: none;
+}
+
 .custom-button { 
   color: #ffffff; 
   padding: 10px 10px; 

@@ -10,6 +10,8 @@ const imgUpload = document.getElementById('imgUpload');
 const span1 = document.getElementById('span1');
 const span2 = document.getElementById('span2');
 
+const close1 = document.getElementById('close1');
+
 const fonte = document.getElementById('fonte');
 const fonte2 = document.getElementById('fonte2');
 
@@ -194,15 +196,17 @@ function hiddenDropArea(validFiles, selectedOption) {
 
     if (validFiles.length === 1) {
         showSingleFile();
-        
+        validate();
     } else if (validFiles.length === 2 && selectedOption === 'crtkey-pfx') {
         showPairFile();
+        validate();
     }
 }
 
 function showSingleFile() {
     img1.style.display = 'block';
     span1.innerText = validFiles[0].name;
+    styleCloseBtn();
 }
 
 function showPairFile() {
@@ -210,6 +214,7 @@ function showPairFile() {
     img2.style.display = 'block';
     span1.innerText = validFiles[0].name;
     span2.innerText = validFiles[1].name;
+    styleCloseBtn();
 }
 
 function emptyArea() {
@@ -221,6 +226,7 @@ function emptyArea() {
 function notEmptyArea() {
     img1.style.display = 'none';
     img2.style.display = 'none';
+    close1.style.display = 'none';
     imgUpload.style.display = 'block';
     fonte.style.display = 'block';
     fonte2.style.display = 'block';
@@ -275,6 +281,45 @@ function sendCrtKeyToMain(password) {
         crtKeyFileName,
         password
     });
+}
+
+function validate() {
+    const convertBtn = document.getElementById('convert');
+
+    if (selectedOption === 'pfx-crtkey' && validFiles.length > 0) {
+        convertBtn.disabled = false; 
+    } else if (validFiles.length === 2 && selectedOption === 'crtkey-pfx') {
+        convertBtn.disabled = false;
+    } else {
+        convertBtn.disabled = true; 
+    }
+}
+
+function deleteFilesInDropArea() {
+    validFiles = [];
+    pfxForButton = undefined;
+    crtForButton = undefined;
+    keyForButton = undefined;
+    notEmptyArea();
+}
+
+function styleCloseBtn(){
+    close1.style.display = 'block';
+    close1.style.display = 'block';
+    close1.style.marginTop = '25px';
+    close1.style.marginBottom = '-20px';
+    close1.style.marginRight = '532px';
+    close1.style.backgroundColor = 'rgba(193, 66, 66, 1)';
+    close1.style.borderRadius = '10px';
+    close1.style.fontFamily = 'Alice';
+}
+
+function showMessage() {
+    close1.setAttribute('title', 'Você pode limpar os arquivos do DropArea ou substitui-los com duplo click/arrastando');
+}
+
+function hideMessage() {
+    close1.removeAttribute('title'); 
 }
 
 

@@ -31,6 +31,9 @@
                 <!-- Titulo da conversão-->
                 <h2 id="output" class="fs-4"></h2>
             </div>
+            <div>
+                <button id="close1" onclick="deleteFilesInDropArea()" onmouseover="showMessage()" onmouseout="hideMessage()">Limpar arquivos</button>
+            </div>
             <div id="docsArea" class="docs-area">
                 <!-- PFX - Area de arquivo -->
                 <div id="drop-area-pfx" class="drop-area">
@@ -65,7 +68,7 @@
             </div>
 
             <div class="button">
-                <button id="convert" class="btn-convert custom-button" type="button" data-target="#password" onclick="chooseFileSendMain()">Converter</button>
+                <button id="convert" class="btn-convert custom-button" type="button" data-target="#password" disabled onclick="chooseFileSendMain()">Converter</button>
             </div>
         </div>
         <div class="nuvens">

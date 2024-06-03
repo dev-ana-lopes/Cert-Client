@@ -78,6 +78,15 @@ function extractPrivateKeyAndCertificate(pfx) {
 }
 
 function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivadaPem) {
+  console.log('\nSalvando arquivo CRT e KEY...');
+  console.log('folderPath:', folderPath);
+  console.log('pfxFileName:', pfxFileName);
+
+  if (!folderPath || !pfxFileName) {
+    console.error('Folder path or PFX file name is undefined');
+    return;
+  }
+
   const certificadoFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.crt`);
   const chavePrivadaFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.key`);
 
@@ -85,7 +94,7 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
     if (fs.existsSync(certificadoFilePath) && fs.existsSync(chavePrivadaFilePath)) {
       console.log("\n",`Nao foi possivel salvar ${certificadoFilePath} porque o arquivo ja existe.`);
       console.log("\n",`Nao foi possivel salvar ${chavePrivadaFilePath} porque o arquivo ja existe.`);
-      eventEmitter.emit('duplicate',{pfxFileName});
+      eventEmitter.emit('duplicate',{ pfxFileName });
       return; 
     } 
   }
@@ -104,6 +113,12 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
 function convertPfx(pfxFilePath, pfxFileName, password) {
   console.log('\nIniciando conversao de PFX para CRT e KEY...');
   const folderPath = createFolder();
+  if (!folderPath) {
+    console.error('Não foi possível criar o diretório de destino.');
+    return;
+  }
+
+  console.log('Folder path criado:', folderPath);
 
   console.log('\nLendo arquivo PFX...');
   const pfxData = readFile(pfxFilePath);
@@ -113,7 +128,7 @@ function convertPfx(pfxFilePath, pfxFileName, password) {
   if (pfx === null || pfx === undefined || pfx === true) {
     return;
   }
-  console.log("\nHHHHHHHH",pfx)
+  console.log('PFX parsed:', pfx);
   const { privateKey, certificate } = extractPrivateKeyAndCertificate(pfx);
   const certificadoPem = forge.pki.certificateToPem(certificate);
   const chavePrivadaPem = forge.pki.privateKeyToPem(privateKey);
@@ -258,28 +273,42 @@ function createFolderWin() {
 function createFolderLinux() {
   const folderName = "Certificados";
   const userHome =  process.env.HOME || process.env.USERPROFILE;
+  console.log('userHome:', userHome);
+  if (!userHome) {
+    console.error('O diretório do usuário não pôde ser determinado.');
+    return null;
+  }
+
   const pathDocuments = path.join(userHome, 'Documents');
   const newPathFolder = path.join(pathDocuments, folderName);
+  console.log('Tentando criar a pasta em:', newPathFolder);
  
   try {
     if (!fs.existsSync(newPathFolder)) {
       fs.mkdirSync(newPathFolder);
       return newPathFolder;
+    } else {
+      return newPathFolder; 
+      
     }
   } catch (err) {
     console.error('Erro ao criar a pasta:', err);
     try {
         const pathDownloads = path.join(userHome, 'Downloads');
         const newPathFolderDownloads = path.join(pathDownloads, folderName);
+        console.log('Tentando criar a pasta em:', newPathFolderDownloads);
         if (!fs.existsSync(newPathFolderDownloads)) {
             fs.mkdirSync(newPathFolderDownloads);
             return newPathFolderDownloads;
+        }  else {
+          return newPathFolderDownloads; 
         }
     } catch (err) {
         console.error('Erro ao criar a pasta na pasta de downloads:', err);
       } 
   }
 }
+
 
 module.exports = {
   checkToConvertPfxToCrt,

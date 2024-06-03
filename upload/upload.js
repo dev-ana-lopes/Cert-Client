@@ -305,17 +305,11 @@ function deleteFilesInDropArea() {
 
 function styleCloseBtn(){
     close1.style.display = 'block';
-    close1.style.display = 'block';
-    close1.style.marginTop = '25px';
-    close1.style.marginBottom = '-20px';
-    close1.style.marginRight = '532px';
-    close1.style.backgroundColor = 'rgba(193, 66, 66, 1)';
-    close1.style.borderRadius = '10px';
-    close1.style.fontFamily = 'Alice';
 }
 
 function showMessage() {
     close1.setAttribute('title', 'Você pode limpar os arquivos do DropArea ou substitui-los com duplo click/arrastando');
+    
 }
 
 function hideMessage() {

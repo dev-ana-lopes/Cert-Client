@@ -90,15 +90,6 @@ function saveCrtAndKeyFiles(folderPath, pfxFileName, certificadoPem, chavePrivad
   const certificadoFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.crt`);
   const chavePrivadaFilePath = path.join(folderPath, `${pfxFileName.replace(/\.pfx$/, '')}.key`);
 
-  if (fs.existsSync(certificadoFilePath) || fs.existsSync(chavePrivadaFilePath)) {
-    if (fs.existsSync(certificadoFilePath) && fs.existsSync(chavePrivadaFilePath)) {
-      console.log("\n",`Nao foi possivel salvar ${certificadoFilePath} porque o arquivo ja existe.`);
-      console.log("\n",`Nao foi possivel salvar ${chavePrivadaFilePath} porque o arquivo ja existe.`);
-      eventEmitter.emit('duplicate',{ pfxFileName });
-      return; 
-    } 
-  }
-
   console.log('\nSalvando arquivo CRT...');
   fs.writeFileSync(certificadoFilePath, certificadoPem);
 

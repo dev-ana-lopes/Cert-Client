@@ -4,14 +4,13 @@ const electronBrowserWindow = require('electron').BrowserWindow;
 const electronIpcMain = require('electron').ipcMain;
 const nodePath = require("path");
 const services = require('./services');
-const { dialog } = require('electron');
 
 let window;
 
 function createWindow() {
     try {
          window = new electronBrowserWindow({
-            width: 1050,
+            width: 1100,
             height: 700,
             show: false,
             resizable: false, 
@@ -22,7 +21,7 @@ function createWindow() {
                 preload: nodePath.join(__dirname, 'preload.js')
             }
         });
-
+        //window.setMenu(null);  
         window.loadFile('index.html')
             .then(() => { window.show(); });
 
@@ -30,6 +29,39 @@ function createWindow() {
     } catch (error) {
         console.error('Erro ao criar janela:', error);
     }
+}
+
+function dialogMessage(message, type) {
+    const dialogWindow = new electronBrowserWindow({
+        width: 300,
+        height: 150,
+        resizable: false,
+        minimizable: false,
+        maximizable: false,
+        frame: false,
+        x: 990,
+        y: 590,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
+    });
+
+    dialogWindow.loadFile(nodePath.join(__dirname, 'dialog.html')).then(() => {
+        dialogWindow.webContents.send('set-message', { message, type });
+    });
+    
+    const timeout = setTimeout(() => {
+        dialogWindow.close();
+    }, 60000);
+    
+    dialogWindow.on('close', () => {
+        clearTimeout(timeout);
+    });
+
+    electronIpcMain.once('close-dialog', () => {
+        dialogWindow.close();
+    });
 }
 
 electronApp.on('ready', () => {
@@ -90,64 +122,36 @@ services.eventEmitter.on('invalidFile', (data) => {
      \ne a entrada espera receber um .KEY mas esta recebendo o tipo: ${data.crtKeyFileName}` :
     `A entrada espera receber um .PFX, mas esta recebendo o tipo: ${data.pfxFileName}`;
 
-    dialog.showMessageBox(null, {
-        title: 'Arquivo Inválido',
-        message: message,
-        buttons: ['OK']
-    });
+    dialogMessage(message, 0);
 });
 
 services.eventEmitter.on('invalidPassword', (data) => {
     let message;
     if (data.password) {
-        message = `Este arquivo esperava uma senha, mas a senha digitada inválida para arquivo PFX:`;
+        message = `Senha digitada, está inválida para arquivo PFX.`;
     } else {
-        message = 'Senha vazia !!';
+        message = 'Senha vazia.';
     }
 
-    dialog.showMessageBox(null, {
-        title: 'Senha Inválida',
-        message: message,
-        buttons: ['OK'],
-    });
-});
-
-services.eventEmitter.on('duplicate', (data) => {
-    const message = data.crtFileName && data.crtKeyFileName ?
-    `Você já fez uma conversão usando o arquivo ${data.crtFileName} e ${data.crtKeyFileName} para gerar um arquivo PFX !!!` :
-    `Você já fez uma conversão usando o arquivo ${data.pfxFileName} para gerar um arquivo CRT e KEY !!!`;
-   
-    dialog.showMessageBox(null, {
-        title: 'Aviso',
-        message: message,
-        buttons: ['OK'],
-    });
+    dialogMessage(message, 0);
 });
 
 services.eventEmitter.on('falseConvert', () => {
-    dialog.showMessageBox(null, {
-        title: 'Aviso',
-        message: 'Erro arquivo do tipo invalido',
-        buttons: ['OK'],
-    });
+    const message = 'Arquivo do tipo invalido.';
+ 
+    dialogMessage(message, 0);
 });
 
 services.eventEmitter.on('filesDoNotMatch', () => {
-    dialog.showMessageBox(null, {
-        title: 'Aviso',
-        message: 'Os arquvios .CRT e .KEY nao correspondentes entre si, verifique a origem de cada!',
-        buttons: ['OK'],
-    });
+    const message = 'Os arquvios .CRT e .KEY não correspondentes entre si, verifique a origem de cada!';
+ 
+    dialogMessage(message, 0);
 });
 
 services.eventEmitter.on('Sucess', (data) => {
     const message =  data.certificadoFilePath ?
-    `Conversão realizada com sucesso!!! O arquvio foi salvo em: ${data.certificadoFilePath}` :
-    `Conversão realizada com sucesso!!! O arquvio foi salvo em: ${data.pfxFilePath}`;
+    `Conversão realizada com sucesso.\nSalvo em:\n${data.certificadoFilePath}` :
+    `Conversão realizada com sucesso.\nSalvo em:\n${data.pfxFilePath}`;
 
-    dialog.showMessageBox(null, {
-        title: 'SUCESSO',
-        message: message,
-        buttons: ['OK'],
-    });
+    dialogMessage(message, 1);
 });

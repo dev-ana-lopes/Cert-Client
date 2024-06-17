@@ -7,8 +7,6 @@ ipcRenderer.on('set-message', (event, { message, type }) => {
     const leftImg = document.getElementById('left-img');
     const title = document.getElementById('title');
 
-console.log(leftImg);
-
     if (type === 0) {
         header.classList.add('error-header');
         title.innerText = '';

@@ -11,5 +11,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
 function showMessage() {
     btnProximo.setAttribute('title', 'Ao clicar aqui, você será encaminhado(a) para área de conversão do certificado.');
     btnDocumentacao.setAttribute('title', 'Ao clicar aqui, você será encaminhado(a) para documentação no github.');
-    
 }

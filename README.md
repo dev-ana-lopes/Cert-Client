@@ -198,7 +198,8 @@ Essas são as plataformas/sistemas operacionais que nosso aplicativo funciona se
   * [GItHub](https://github.com/delvecch1o) - Rodrigo Pinheiro / delvecch1o
   * [GItHub](https://github.com/nickoolaz) -Nicolas Araujo / nickoolaz
   * [GItHub](https://github.com/dev-ana-lopes) - Ana Lopes / dev-ana-lopes
-
+## Instalar o exe
+Para instalar basta abrir o arquvio .exe e a instalação será feita.
 ## License
 
 MIT License

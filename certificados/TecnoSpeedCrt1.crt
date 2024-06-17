@@ -1,3 +1,7 @@
+Bag Attributes
+    localKeyID: B8 DE F1 DA 5D 3A B8 DD 2D B2 59 A5 40 A9 4B AA 95 E9 83 46 
+subject=C=AU, ST=Some-State, O=Internet Widgits Pty Ltd
+issuer=C=AU, ST=Some-State, O=Internet Widgits Pty Ltd
 -----BEGIN CERTIFICATE-----
 MIIDazCCAlOgAwIBAgIUEcrxokIge2mk1TnjcchPORtOPegwDQYJKoZIhvcNAQEL
 BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM

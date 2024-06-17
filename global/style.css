@@ -1,0 +1,152 @@
+/* ------------ estilização utilizada para todas as páginas ------------ */
+:root {
+    --cor-primaria: #8162d4;
+    --cor-secundaria: #927ae7;
+    --cor-terciaria: #a398f9;
+    --text-color: white;
+    --text-color-dark: #4B2C7B;
+    --font: 'Alice';
+    --bg-gradiente-light: linear-gradient(to left, #8162D4, #927AE7, #A398F9, #ffffff);
+}
+
+/* background tela inicial */
+.bg-gradiente {
+    background-image: linear-gradient(to right, #4B2C7B, #5D349E, #6F42C1, #9985d1);
+    color: var(--text-color);   
+}
+
+/* background sistema mode light */
+.bg-gradiente-light {
+  background-image: linear-gradient(to left, #8162D4, #927AE7, #A398F9, #ffffff);
+  color: var(--text-color);   
+}
+
+
+
+/* background sistema mode dark */
+.bg-gradiente-dark {
+  background-image: linear-gradient(to left, #220a46, #3a205e, #4d3177, #a275e6);
+  color: var(--text-color);   
+}
+
+/* estilo para o header padrão */
+header {
+  nav {
+    .menu-right {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+  }
+}
+
+/* ------------ estilização da página index.html ------------ */
+#logo-index {
+  width: 487px;
+}
+
+/* personalização dos botões */
+/* botão sem preenchimento e com bordas brancas */
+#bg-btn-out {
+    border: var(--text-color) solid 3px;
+    border-radius: 30px;
+    
+    a {
+        color: var(--text-color);
+        text-decoration: none;
+    } 
+}
+
+/* botão branco */
+#bg-btn-white {
+    background-color: var(--text-color);
+    border-radius: 30px;
+    a {
+        color: var(--text-color-dark); 
+        text-decoration: none;
+    }
+}
+
+/* alinhamento dos botões */
+#btn-gpm {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pd-body{
+  padding-top: 6px;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+body{
+  width: 800px;
+  height: 560px;
+
+  h1 {
+      font-size: 70px;
+  }
+
+  .row {
+      padding-top: 20px;
+  }
+
+  .align-div {
+      align-items: center;
+      display: grid;
+  }
+}
+
+.navbar{
+  background-color: white;
+  height: 38px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 6px;
+  padding-right: 6px;
+  
+
+  .logo-icon{
+    color: black;
+  }
+
+  #menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 6px;
+  
+    .item{
+      width: 26px;
+      height: 26px;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img{
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+.selector {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.size-logo {
+  width: 30%;
+  height: 30%;
+  margin-top: 18px;
+  margin-left: 18px;
+}

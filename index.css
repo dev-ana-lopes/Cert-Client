@@ -1,0 +1,41 @@
+.font-size {
+    font-size: 23px;
+    margin-top: 15px;
+}
+
+.next-btn{
+    width: 50%;
+    height: 57px;
+    font-size: 25px;
+}
+
+.docs-btn{
+    width: 65%;
+    height: 57px;
+    font-size: 22px;
+}
+
+.h2-style{
+    margin: 10px;
+}
+
+.img{
+    width: 100%;
+    height: auto;
+    margin-left: 25%;
+}
+
+.custom-button { 
+    color: #ffffff; 
+    padding: 10px 20px; 
+    transition: background-color 0.3s, color 0.3s; 
+  }
+  
+  .custom-button:hover {
+    background-color: #ffffff; 
+    color: var(--text-color-dark); 
+  }
+  
+  .custom-button:active {
+    transform: scale(0.95);
+  }

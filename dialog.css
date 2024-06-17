@@ -1,0 +1,49 @@
+body {
+    font-family: 'Alice';
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    background-color: rgba(66, 193, 111, 1);
+    height: 40px;
+    width: 100%; 
+}
+
+.error-header {
+    background-color: rgba(193, 66, 66, 1); 
+}
+
+.left-img {
+    width: 22px;
+    height: auto;
+    margin-left: 10px;
+}
+
+.right-img {
+    width: 22px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.message{
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-right: 20px;
+    font-family: 'Alice';
+    word-wrap: break-word;
+}
+
+#title {
+    font-weight: bold;
+    color: white;
+    font-size: 25px;
+}
+
+#iconError{
+    display: none;    
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="upload.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link rel="shortcut icon" href="imagem/icon.svg" type="image/x-icon">
+    <title>CertClient</title>
+</head>
+
+<body class="tela-upload">
+    <header>
+        <nav class="nav-style">
+            <img class="size-logo" src="../imagem/tecnospeed-white 1.svg">
+            <div class="menu-right">
+                <ul class="nav col-6 col-md-auto mb-2 justify-content-end mb-md-0">
+                    <li><a href="../index.html" class="px-2 tx-color-white">Início</a></li>
+                    <li><a href="../tipo-certificado/tipo-certificado.html" class="px-2 tx-color-white">Tipo de
+                            arquivo</a></li>
+                    <li><a id="docs" class="px-2 tx-color-white">Documentação</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <div class="border-bottom title">
+                <!-- Titulo da conversão-->
+                <h2 id="output" class="fs-4"></h2>
+            </div>
+            <div class="line-button">
+                <button id="close1" class="clean-page-btn" onclick="deleteFilesInDropArea()" onmouseover="showMessage()" onmouseout="hideMessage()">Limpar arquivos</button>
+            </div>
+            <div id="docsArea" class="docs-area">
+                <!-- PFX - Area de arquivo -->
+                <div id="drop-area-pfx" class="drop-area">
+                    <div id="drop-area-text" class="drop-area-text">
+                        <div id="imgUpload" class="img-upload selector">
+                            <img class="img selector" src="../imagem/upload.png" alt="ícone de upload">
+                        </div>
+                        <div class="title-area">
+                            <h2 id="fonte" class="fonte">Clique aqui e adicione seu arquivo válido.<br></h2>
+                            <h2 id="fonte2" class="fonte">Ou arraste e solte o arquivo na área delimitada.</h2>
+                        </div>
+                    </div>
+                    <div class="icon-upload">
+                        <div class="document-itens">
+                            <img id="img1" class="sizeFile selector" src="../imagem/file.png">
+                            <span id="span1" class="title-docs"></span>
+                        </div>
+                        <div class="document-itens">
+                            <img id="img2" class="sizeFile selector" src="../imagem/file.png">
+                            <span id="span2" class="title-docs"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container2">
+                <div class="barra">
+                    <div id="mensagem" class="mensagem">Digite a senha do seu arquivo </div>
+                </div>
+                <div class="caixa-branca">
+                    <input id="password" type="password" class="entrada-senha" placeholder="Digite a senha" />
+                </div>
+            </div>
+
+            <div class="button">
+                <button id="convert" class="btn-convert custom-button" type="button" data-target="#password" disabled onclick="chooseFileSendMain()">Converter</button>
+            </div>
+        </div>
+        <div class="nuvens">
+            <div class="nuvem-d selector">
+                <img src="../imagem/Nuvem-Direita_2.png" class="nuvem-di">
+            </div>
+            <div class="nuvem-e selector">
+                <img src="../imagem/Nuven-esquerda_2.png" class="nuvem-es">
+            </div>
+        </div>
+    </main>
+    <input type="file" id="pfxInput" accept=".pfx" style="display:none;">
+    <input type="file" id="crtInput" accept=".crt,.key" style="display:none;">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="upload.js"></script>
+</body>
+
+</html>
